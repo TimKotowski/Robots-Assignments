@@ -10,9 +10,10 @@ const Robot = require('./robot')
 // Example:
 
 // proejct may belong to many do use hasMany
-Project.hasMany(Robot)
-// robot may belong to
-Robot.belongsToMany(Project, {through: 'robot'})
+Project.belongsTo(Robot);
+Robot.hasMany(Project);
+
+
 
 
 module.exports = {

@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const {Project, Robot} = require('../db')
 
+
+
+// api/projects
 router.get('/', async (req, res, next) => {
 
   try {
@@ -12,7 +15,7 @@ router.get('/', async (req, res, next) => {
 });
 
 
-
+// api/projects/:projectId
 router.get('/:projectId', async (req, res, next) => {
   try {
     const id = req.params.projectId
@@ -28,13 +31,15 @@ router.get('/:projectId', async (req, res, next) => {
   }
 });
 
+// api/projects
 router.post('/', async (req, res, next) => {
   try {
-      const {name, imageUrl, fuelType, fuelLevel} = req.body
+    const {title, deadline, priority, description} = req.body
       const createProject = await Project.create({
-        name,
-        imageUrl,
-        fuelType,fuelLevel
+        title,
+        deadline,
+        priority,
+        description
       })
 
 
@@ -44,6 +49,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+// api.projects/:projectId
 router.put('/:projectId', async (req, res, next) => {
   try {
      const [projectCount, affectProject] = await Project.update(req.body, {
@@ -60,7 +66,8 @@ router.put('/:projectId', async (req, res, next) => {
   }
 })
 
-router.delete('/:projectId', async (req, res, next) => {
+// api/projects/:projectId
+router.delete('/projectId', async (req, res, next) => {
   try {
     const id = req.params.projectId
     const deleteProject = await Project.destroy({

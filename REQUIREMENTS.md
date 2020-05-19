@@ -49,20 +49,19 @@ Congrats! You have completed your first vertical slice! Make sure to `commit -m 
 
 - Write a component to display a single robot with the following information:
   - [X] The robot's name, image, fuelType, fuelLevel
-  // TODO: check back later
+  // TODO: check back
   - [] The names of all their assigned projects (or a helpful message if they don't have any)
 - [X] Display the appropriate robot when the url matches `/robots/:robotId`
 - [X] Clicking on a robot from the all-robots view should navigate to show that robot in the single-robot view
 
 - Write a component to display a single project with the following information:
-  - [ ] The project's title, deadline, priority, description
-   // TODO: check back later
+  - [X] The project's title, deadline, priority, description
   - [ ] A list of the names of all robots in that project (or a helpful message if it doesn't have any robots)
-- [ ] Display the appropriate project's info when the url matches `/projects/:projectId`
-- [ ] Clicking on a project from the all-projects view should navigate to show that project in the single-project view
+- [X] Display the appropriate project's info when the url matches `/projects/:projectId`
+- [X] Clicking on a project from the all-projects view should navigate to show that project in the single-project view
 
-- [ ] Clicking on the name of a robot in the single-project view should navigate to show that robot in the single-robot view
-- [ ] Clicking on the name of a project in the single-robot view should navigate to show that project in the single-project view
+- [X] Clicking on the name of a robot in the single-project view should navigate to show that robot in the single-robot view
+- [] Clicking on the name of a project in the single-robot view should navigate to show that project in the single-project view
 
 #### Backend
 
@@ -78,23 +77,22 @@ Congrats! You have completed your second vertical slice! Make sure to `commit -m
 <details>
 
 #### Frontend
-
-- [ ] Write a component to display a form for adding a new robot that contains _at least_ an input for name
-- [ ] Display this component as part of the all-robots view, alongside the list of robots
+// TODO:
+- [X] Write a component to display a form for adding a new robot that contains _at least_ an input for name
+// ??
+- [X] Display this component as part of the all-robots view, alongside the list of robots
 - Submitting the form with valid data should:
-  - [ ] Make an AJAX request that causes the new robot to be persisted in the database
-  - [ ] Add the new robot to the list of robots without needing to refresh the page
+  - [X] Make an AJAX request that causes the new robot to be persisted in the database
+  - [X] Add the new robot to the list of robots without needing to refresh the page
 
-- [ ] Write a component to display a form for adding a new project that contains _at least_ an input for title
-- [ ] Display this component as part of the all-projects view, alongside the list of projects
-- Submitting the form with valid data should:
-  - [ ] Make an AJAX request that causes the new project to be saved to the database
-  - [ ] Add the new project to the list of projects without needing to refresh the page
+- [X] Write a component to display a form for adding a new project that contains _at least_ an input for title
+- [X] Make an AJAX request that causes the new project to be saved to the database
+  - [X] Add the new project to the list of projects without needing to refresh the page
 
 #### Backend
 
-- [ ] Write a route to add a new robot
-- [ ] Write a route to add a new project
+- [X] Write a route to add a new robot
+- [X] Write a route to add a new project
 
 Congrats! You have completed your third vertical slice! Make sure to `commit -m "Feature: Add Robot and Project"` before moving on (see RUBRIC.md - points are awarded/deducted for a proper git workflow)!
 

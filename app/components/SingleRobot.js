@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleRobot } from '../redux/singleRobot';
 
+
 export class SingleRobots extends Component {
-
-
-
   componentDidMount() {
     const robotId = this.props.match.params.robotId;
     this.props.loadRobotInfo(robotId);
@@ -13,19 +11,25 @@ export class SingleRobots extends Component {
   }
 
   render() {
-    const { robots } = this.props;
-    console.log('pejcrt', robots.projects)
+    const { robot } = this.props;
+    console.log('single robot', robot);
     return (
-      <div>
-        <div className="card-flex-wrapper">
-          <div className="card-flex-image"></div>
-          <div className="card-flex-content">
-            <h1>{robots.name}</h1>
-            <h1>{robots.fuelType}</h1>
-            <h1>{robots.fuelLevel}</h1>
-          {/* <h1>{!robots.projects && 'not prjoect data showing'}</h1> */}
-            <img src={`https://robohash.org/${robots.imageUrl}`} />
-          </div>
+      <div className="card" style={{ width: '18rem' }}>
+
+        <div
+          key={robot.id}
+          className="card-body"
+          style={{ backgroundColor: 'grey' }}
+        >
+          <img
+            className="card-img-top "
+            src={`https://robohash.org/${robot.imageUrl}`}
+            alt="Card image cap"
+          />
+          <h5 className="card-title">{robot.name}</h5>
+          <h4 className="card-text">{robot.fuelType}</h4>
+          <h4 className="card-text">{robot.fuelLevel}</h4>
+          {/* <h4 className="card-text">{robot.projects.title}</h4> */}
         </div>
       </div>
     );
@@ -33,7 +37,7 @@ export class SingleRobots extends Component {
 }
 
 const mapState = (state) => ({
-  robots: state.robotInfo.singleRobotInfo,
+  robot: state.robotInfo.singleRobotInfo,
 });
 
 const mapDispatch = (dispatch) => ({

@@ -3,6 +3,7 @@ import Routes from './Routes';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Navbar from './Navbar';
 
+
 export default class Main extends Component {
   render() {
     return (
@@ -10,6 +11,7 @@ export default class Main extends Component {
       <div>
         <Navbar />
         <Routes />
+
       </div>
       </Router>
     )
