@@ -1,16 +1,19 @@
 const { green, red } = require('chalk');
 const { db, Project, Robot } = require('./server/db');
+const project_seed = require('./project_seed')
+const robot_seed = require('./robot_seed')
 
 const seed = async () => {
   try {
     await db.sync({ force: true });
-
-    // seed your database here!
+    await Project.bulkCreate(project_seed)
+    await Robot.bulkCreate(robot_seed)
 
   } catch (err) {
     console.log(red(err));
   }
 };
+
 
 module.exports = seed;
 // If this module is being required from another module, then we just export the

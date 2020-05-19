@@ -247,7 +247,7 @@ describe('Tier One: Projects', () => {
 
     // Consider writing your GET route in server/api/robots.js. And don't
     // forget to apply the express router to your API in server/api/index.js!
-    xit('GET /api/projects responds with all projects', async () => {
+    it('GET /api/projects responds with all projects', async () => {
       const response = await agent.get('/api/projects').expect(200);
       expect(response.body).to.deep.equal(projects);
       expect(Project.findAll.calledOnce).to.be.equal(true);
@@ -269,7 +269,7 @@ describe('Tier One: Projects', () => {
     });
     afterEach(() => db.sync({ force: true }));
 
-    xit('has fields title, deadline, priority, completed, description', async () => {
+    it('has fields title, deadline, priority, completed, description', async () => {
       project.notARealAttribute = 'does not compute';
       const savedProject = await Project.create(project);
       expect(savedProject.title).to.equal('Make pizza');
@@ -284,7 +284,7 @@ describe('Tier One: Projects', () => {
       expect(savedProject.notARealAttribute).to.equal(undefined);
     });
 
-    xit('title cannot be null', async () => {
+    it('title cannot be null', async () => {
       const blankProject = Project.build();
       try {
         await blankProject.validate();
@@ -294,7 +294,7 @@ describe('Tier One: Projects', () => {
       }
     });
 
-    xit('title cannot be empty', async () => {
+    it('title cannot be empty', async () => {
       const emptyTitleProject = Project.build({ title: '' });
       try {
         await emptyTitleProject.validate();
@@ -304,11 +304,12 @@ describe('Tier One: Projects', () => {
       }
     });
 
+    // TODO: extra credit test spec
     xit('*** deadline must be a valid date', () => {
       throw new Error('replace this error with your own test');
     });
 
-    xit('priority must be an integer between 1 and 10', async () => {
+    it('priority must be an integer between 1 and 10', async () => {
       project.priority = 15;
 
       const highPriority = Project.build(project);
@@ -329,7 +330,7 @@ describe('Tier One: Projects', () => {
       }
     });
 
-    xit('completed is false by default', () => {
+    it('completed is false by default', () => {
       const projectNoCompleted = Project.build({
         title: 'Clean campus',
         priority: 5,
@@ -347,7 +348,7 @@ describe('Tier One: Projects', () => {
     // command line.
     beforeEach(seed);
 
-    xit('populates the database with at least three projects', async () => {
+    it('populates the database with at least three projects', async () => {
       const seedProjects = await Project.findAll();
       expect(seedProjects).to.have.lengthOf.at.least(3);
     });

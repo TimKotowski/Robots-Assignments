@@ -5,11 +5,11 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import store from './store';
-import Routes from './components/Routes';
+import Main from './components/Main'
 
 render(
   <Provider store={store}>
-    <Routes />
+    <Main />
   </Provider>,
   document.getElementById('main')
 );

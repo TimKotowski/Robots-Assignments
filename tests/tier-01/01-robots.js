@@ -126,14 +126,14 @@ describe('Tier One: Robots', () => {
       fakeStore = mockStore(initialState);
     });
     describe('set/fetch robots', () => {
-      xit('setRobots action creator', () => {
+      it('setRobots action creator', () => {
         expect(setRobots(robots)).to.deep.equal({
           type: 'SET_ROBOTS',
           robots,
         });
       });
 
-      xit('fetchRobots thunk creator returns a thunk that GETs /api/robots', async () => {
+      it('fetchRobots thunk creator returns a thunk that GETs /api/robots', async () => {
         await fakeStore.dispatch(fetchRobots());
         const [getRequest] = mockAxios.history.get;
         expect(getRequest).to.not.equal(undefined);
@@ -156,7 +156,7 @@ describe('Tier One: Robots', () => {
       xit('*** returns the initial state by default', () => {
         throw new Error('replace this error with your own test');
       });
-
+      // TODO: know it passes
       xit('reduces on SET_ROBOTS action', () => {
         const action = { type: 'SET_ROBOTS', robots };
 
@@ -174,7 +174,7 @@ describe('Tier One: Robots', () => {
     // This test is expecting your component to dispatch a thunk after it mounts
     // Remember that getRobots prop from an earlier test? Now's a good time
     // for a mapDispatch.
-    xit('initializes robots from the server when the application loads the /robots route', async () => {
+    it('initializes robots from the server when the application loads the /robots route', async () => {
       const reduxStateBeforeMount = store.getState();
       expect(reduxStateBeforeMount.robots).to.deep.equal([]);
       mount(
@@ -255,7 +255,7 @@ describe('Tier One: Robots', () => {
 
     // Consider writing your GET route in server/api/robots.js. And don't
     // forget to apply the express router to your API in server/api/index.js!
-    xit('GET /api/robots responds with all robots', async () => {
+    it('GET /api/robots responds with all robots', async () => {
       const response = await agent.get('/api/robots').expect(200);
       expect(response.body).to.deep.equal(robots);
       expect(Robot.findAll.calledOnce).to.be.equal(true);
@@ -275,7 +275,7 @@ describe('Tier One: Robots', () => {
     });
     afterEach(() => db.sync({ force: true }));
 
-    xit('has fields name, imageUrl, fuelType, fuelLevel', async () => {
+    it('has fields name, imageUrl, fuelType, fuelLevel', async () => {
       robot.notARealAttribute = 'does not compute';
       const savedRobot = await Robot.create(robot);
       expect(savedRobot.name).to.equal('R2-D2');
@@ -285,11 +285,18 @@ describe('Tier One: Robots', () => {
       expect(savedRobot.notARealAttribute).to.equal(undefined);
     });
 
-    xit('*** name cannot be null or an empty string', () => {
-      throw new Error('replace this error with your own test');
+    //  Extra credit test spec
+    it('name cannot be empty', async () => {
+      const emptyNameProject= Robot.build({ name: '' });
+      try {
+        await emptyNameProject.validate();
+        throw Error('validation should have failed with empty name');
+      } catch (err) {
+        expect(err.message).to.contain('Validation notEmpty on name failed');
+      }
     });
 
-    xit('fuelType can only be gas, diesel, or electric (defaults to electric)', async () => {
+    it('fuelType can only be gas, diesel, or electric (defaults to electric)', async () => {
       robot.fuelType = 'the power of love';
       try {
         const badFuelRobot = await Robot.create(robot);
@@ -304,7 +311,7 @@ describe('Tier One: Robots', () => {
       expect(defaultFuelRobot.fuelType).to.equal('electric');
     });
 
-    xit('fuelLevel must be between 0 and 100 (defaults to 100)', async () => {
+    it('fuelLevel must be between 0 and 100 (defaults to 100)', async () => {
       robot.fuelLevel = -10;
       try {
         const negativeFuelRobot = await Robot.create(robot);
@@ -336,7 +343,7 @@ describe('Tier One: Robots', () => {
     // command line.
     beforeEach(seed);
 
-    xit('populates the database with at least three robots', async () => {
+    it('populates the database with at least three robots', async () => {
       const seedRobots = await Robot.findAll();
       expect(seedRobots).to.have.lengthOf.at.least(3);
     });
