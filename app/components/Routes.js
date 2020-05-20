@@ -8,6 +8,7 @@ import AllProjects from './AllProjects'
 import SingleRobots from './SingleRobot';
 import SingleProject  from './SingleProject';
 import RobotInputForm from './RobotInputForm';
+import  ProjectInputForm  from './ProjectInputForm';
 
 const Routes = () => {
   return (
@@ -16,7 +17,8 @@ const Routes = () => {
       <Route path="/robots/:robotId" component={SingleRobots} />
       <Route exact path="/projects" component={AllProjects} />
       <Route  path="/projects/:projectId" component={SingleProject} />
-      <Route exact path="/" component={RobotInputForm} />
+      {/* <Route  path="/robotForm" component={RobotInputForm} /> */}
+      <Route exact path="/" component={ProjectInputForm} />
       <Route>
         <div>
     <h1>Page no found sorry!</h1>

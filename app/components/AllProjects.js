@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchAllProjects } from '../redux/projects';
 import { NavLink } from 'react-router-dom';
+import  ProjectInputForm  from './ProjectInputForm';
 
 // Notice that we're exporting the AllProjects component twice. The named export
 // (below) is not connected to Redux, while the default export (at the very
@@ -15,17 +16,17 @@ export class AllProjects extends React.Component {
     console.log('projects', this.props.projects);
     return (
       <div className="container">
+        {/* <ProjectInputForm /> */}
         {this.props.projects.map((project) => (
-          <div key={project.id} className="card"  >
-            <div  className="card border-primary mb-3">
+          <div key={project.id}  className="card"  >
+            <div  className="card ">
               <div className="card-body" style={{backgroundColor: 'grey'}}  >
               <NavLink to={`/projects/${project.id}`}>
                   <h3>{project.title}</h3>
                 </NavLink>
-                  <h3>{project.description}</h3>
-                  <h3>{project.priority}</h3>
-                  <h3>{project.deadline}</h3>
-
+                  <h3>Description: {project.description}</h3>
+                  <h3>Priority: {project.priority}</h3>
+                  <h3>Deadline: {project.deadline}</h3>
               </div>
             </div>
           </div>

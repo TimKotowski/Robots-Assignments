@@ -21,6 +21,7 @@ export class RobotInputForm extends Component {
     this.props.createRobot({
       name
     });
+
   }
 
   render() {

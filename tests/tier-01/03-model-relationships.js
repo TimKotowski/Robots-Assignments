@@ -7,7 +7,7 @@ describe('Tier One: Project >-< Robot Association', () => {
   before(() => db.sync({ force: true }));
   afterEach(() => db.sync({ force: true }));
 
-  describe('Sequelize Models', () => {
+  describe.only('Sequelize Models', () => {
     it('a project may belong to many robots', async () => {
       const r2d2 = await Robot.create({ name: 'R2-D2' });
       const wallE = await Robot.create({ name: 'WALL-E' });

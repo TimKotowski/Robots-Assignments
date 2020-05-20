@@ -37,7 +37,7 @@ export const fetchAllRobots = () => async (dispatch) => {
     console.log('error in fetchRobots', error);
   }
 };
-export const fetchNewRobot = (robotInfo) => async (dispatch) => {
+export const fetchNewRobot = robotInfo => async (dispatch) => {
   try {
     console.log('hitting all robots fetch');
     const { data: newRobot } = await axios.post('/api/robots', robotInfo);

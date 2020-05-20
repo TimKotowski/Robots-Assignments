@@ -19,7 +19,7 @@ console.log('nope');
     return (
       <div  className="container">
           <div className="card"  >
-            <div  className="card border-primary mb-3">
+            <div  className="card">
               <div  key={project.id}   className="card-body" style={{backgroundColor: 'grey'}}  >
                   <h3>{project.title}</h3>
                   <h3>{project.description}</h3>

@@ -25,11 +25,11 @@ export class AllRobots extends Component {
                 src={`https://robohash.org/${robot.imageUrl}`}
                 />
             </NavLink>
-            <div className="card-body" style={{ backgroundColor: 'grey' }}>
-              <h5 className="card-title">{robot.name}</h5>
-              <h4 className="card-text">{robot.fuelType}</h4>
-              <h4 className="card-text">{robot.fuelLevel}</h4>
-
+            <div className="card-body" style={{  fontWeight: 'bold', backgroundColor: '#8c8c8c' }}>
+              <h2 className="card-title">{robot.name}</h2>
+              <h3 className="card-text"  style={{ color: '#0d0d0d' }}  >Fuel Type: {robot.fuelType}</h3>
+              <h3 className="card-text"   style={{ color: '#0d0d0d' }}  >Fuel Level: {robot.fuelLevel}</h3>
+            <button type="button"  value="Remove text input "className="btn btn-danger " style={{width: '2.4rem', height: '2.2rem' }}>X</button>
             </div>
           </div>
         ))}
