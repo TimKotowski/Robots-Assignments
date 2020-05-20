@@ -1,13 +1,14 @@
 const { green, red } = require('chalk');
 const { db, Project, Robot } = require('./server/db');
-const project_seed = require('./project_seed')
-const robot_seed = require('./robot_seed')
+// const project_seed = require('./project_seed')
+// const robot_seed = require('./robot_seed')
 
 const seed = async () => {
   try {
     await db.sync({ force: true });
-    await Project.bulkCreate(project_seed)
-    await Robot.bulkCreate(robot_seed)
+    // got rif of my seeding, if i seed my databsase get a vladiation error until i like my data to submit mulitple times then it goes way
+    // getting rid of seeding data to start fixes this
+    // so i start with no data
 
   } catch (err) {
     console.log(red(err));

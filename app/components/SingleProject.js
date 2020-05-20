@@ -21,10 +21,9 @@ console.log('nope');
           <div className="card"  >
             <div  className="card">
               <div  key={project.id}   className="card-body" style={{backgroundColor: 'grey'}}  >
-                  <h3>{project.title}</h3>
-                  <h3>{project.description}</h3>
-                  <h3>{project.priority}</h3>
-                  <h3>{project.deadline}</h3>
+              <h3  style={{ color: '#0d0d0d' }}    >Description: {project.description}</h3>
+                  <h3 style={{ color: '#0d0d0d' }}   >Priority: {project.priority}</h3>
+                  <h3  style={{ color: '#0d0d0d' }}  >Deadline: {project.deadline}</h3>
               </div>
             </div>
           </div>

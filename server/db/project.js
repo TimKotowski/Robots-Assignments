@@ -26,7 +26,7 @@ const Project = db.define('project', {
   },
   description: {
     type: Sequelize.TEXT,
-  },
+  }
 });
 
 module.exports = Project;

@@ -8,20 +8,20 @@ module.exports = [
 
 
   },
-  {
-    id: 2,
-    name: 'Bob',
-    imageUrl: 'https://robohash.org/?set=set3',
-    fuelType: 'gas',
-    fuelLevel: 88.34,
-  },
-  {
-    id: 3,
-    name: 'Joe',
-    imageUrl: 'https://robohash.org/?set=set3',
-    fuelType: 'gas',
-    fuelLevel: 88.34,
-  },
+  // {
+  //   id: 2,
+  //   name: 'Bob',
+  //   imageUrl: 'https://robohash.org/?set=set3',
+  //   fuelType: 'gas',
+  //   fuelLevel: 88.34,
+  // },
+  // {
+  //   id: 3,
+  //   name: 'Joe',
+  //   imageUrl: 'https://robohash.org/?set=set3',
+  //   fuelType: 'gas',
+  //   fuelLevel: 88.34,
+  // },
 
 ]
 

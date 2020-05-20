@@ -12,26 +12,31 @@ const initialState = {
 const GET_ALL_ROBOTS = 'GET_ALL_ROBOTS';
 const CREATE_ROBOT_INFO = 'CREATE_ROBOT_INFO';
 const UPDATE_ROBOT_FORM = 'UPDATE_ROBOT_FORM';
+const DELETE_ROBOT = 'DELETE_ROBOT'
 
-export const getAllRobots = (robots) => ({
+export const getAllRobots = robots => ({
   type: GET_ALL_ROBOTS,
   robots
 });
-export const updateRobotForm = (e) => ({
+export const updateRobotForm = e => ({
   type: UPDATE_ROBOT_FORM,
   e,
 });
 
-export const createRobotInfo = (robotInfo) => ({
+export const createRobotInfo = robotInfo => ({
   type: CREATE_ROBOT_INFO,
   robotInfo,
 });
+
+export const deleteRobotUser = robot => ({
+  type: DELETE_ROBOT,
+  robot
+})
 
 // fetchRobots for test to
 export const fetchAllRobots = () => async (dispatch) => {
   try {
     const { data: robots } = await axios.get('/api/robots');
-    console.log()
     dispatch(getAllRobots(robots));
   } catch (error) {
     console.log('error in fetchRobots', error);
@@ -39,27 +44,35 @@ export const fetchAllRobots = () => async (dispatch) => {
 };
 export const fetchNewRobot = robotInfo => async (dispatch) => {
   try {
-    console.log('hitting all robots fetch');
     const { data: newRobot } = await axios.post('/api/robots', robotInfo);
-    console.log('hitting');
     dispatch(createRobotInfo(newRobot));
   } catch (error) {
     console.log('error in fetchrobots post', error);
   }
 };
 
+
+export const fetchDeletedRobot = robotId => async(dispatch) => {
+  try {
+      const {data: robot} = await axios.delete(`/api/robots/${robotId}`, robotId)
+      dispatch(deleteRobotUser(robot))
+  } catch (error) {
+    console.log('error in fetchDelete thunk creator', error)
+  }
+}
+
+
+
 const robotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_ROBOTS:
-      // console.log('GET_ALL_ROBOTS state is: ' + JSON.stringify({ ...state, robots: action.robots }))
       return { ...state, robots: action.robots };
     case UPDATE_ROBOT_FORM:
       return {...state, user: { ...state.user, [action.e.target.name]: action.e.target.value }}
     case CREATE_ROBOT_INFO:
-      // let newState = { ...state, robots: [...state.robots, action.robotInfo] }
-      // console.log('current robots in state: ' + JSON.stringify(state.robots))
-      // console.log('newState robots is: ' + JSON.stringify(newState.robots))
       return { ...state, robots: [...state.robots, action.robotInfo] };
+      case DELETE_ROBOT:
+        return {...state, robots: state.robots.filter(robot => robot.id !== action.robot)}
     default:
       return state;
   }

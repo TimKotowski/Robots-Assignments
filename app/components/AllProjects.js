@@ -12,6 +12,9 @@ export class AllProjects extends React.Component {
     this.props.loadProjects();
   }
 
+
+
+
   render() {
     console.log('projects', this.props.projects);
     return (
@@ -24,9 +27,9 @@ export class AllProjects extends React.Component {
               <NavLink to={`/projects/${project.id}`}>
                   <h3>{project.title}</h3>
                 </NavLink>
-                  <h3>Description: {project.description}</h3>
-                  <h3>Priority: {project.priority}</h3>
-                  <h3>Deadline: {project.deadline}</h3>
+                  <h3  style={{ color: '#0d0d0d' }}    >Description: {project.description}</h3>
+                  <h3 style={{ color: '#0d0d0d' }}   >Priority: {project.priority}</h3>
+                  <h3  style={{ color: '#0d0d0d' }}  >Deadline: {project.deadline}</h3>
               </div>
             </div>
           </div>
