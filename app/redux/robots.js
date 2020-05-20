@@ -13,6 +13,7 @@ const GET_ALL_ROBOTS = 'GET_ALL_ROBOTS';
 const CREATE_ROBOT_INFO = 'CREATE_ROBOT_INFO';
 const UPDATE_ROBOT_FORM = 'UPDATE_ROBOT_FORM';
 const DELETE_ROBOT = 'DELETE_ROBOT'
+const UPDATE_ROBOT_INFORMATION = 'UPDATE_ROBOT_INFORMATION'
 
 export const getAllRobots = robots => ({
   type: GET_ALL_ROBOTS,
@@ -28,11 +29,15 @@ export const createRobotInfo = robotInfo => ({
   robotInfo,
 });
 
-export const deleteRobotUser = robot => ({
+export const deleteRobotUser = id => ({
   type: DELETE_ROBOT,
-  robot
+  id
 })
 
+export const updateRobotInformation = (id) => ({
+  type: UPDATE_ROBOT_INFORMATION,
+  id,
+})
 // fetchRobots for test to
 export const fetchAllRobots = () => async (dispatch) => {
   try {
@@ -58,15 +63,28 @@ export const fetchNewRobot = robotInfo => async (dispatch) => {
 export const fetchDeletedRobot = robotId => async(dispatch) => {
   try {
     console.log("hitting")
-    const {data: robot} = await axios.delete(`/api/robots/${robotId}`, robotId)
+    // dont need a const with data in here becaseu the axios is lareadying deleting it so just dispatch it
+     await axios.delete(`/api/robots/${robotId}`, robotId)
     console.log("sd")
-    dispatch(deleteRobotUser(robot))
+    dispatch(deleteRobotUser(robotId))
     console.log("d")
   } catch (error) {
     console.log('error in fetchDelete thunk creator', error)
   }
 }
 
+export const feathUpdatedRobot = robotId => async(dispatch) => {
+  try {
+    console.log('hitting the start of update thunk')
+
+    const {data: robot} = await axios.put(`api/robots/${robotId}`, robotId)
+    console.log('hitting the middle of update thunk')
+    dispatch(updateRobotInformation(robot))
+    console.log('hitting the end of update thunk, it worked!')
+  } catch (error) {
+    console.log('error in fetch updated thunk creator', error)
+  }
+}
 
 const robotsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -77,11 +95,30 @@ const robotsReducer = (state = initialState, action) => {
     case CREATE_ROBOT_INFO:
       return { ...state, robots: [...state.robots, action.robotInfo] };
       case DELETE_ROBOT:
-        // console.log(JSON.stringify({...state, robots: state.robots.filter(robot => robot.id !== action.robot)}))
-        return {...state, robots: state.robots.filter(robot => robot.id !== action.robot)}
+        // console.log(action)
+        // console.log(JSON.stringify({...state, robots: state.robots.filter(robot => robot.id !== action.robot)})
+        return {...state, robots: state.robots.filter(robot => robot.id !== action.id)}
+        // case UPDATE_ROBOT_INFORMATION:
+        // // return  state.robots.filter((robot) => robot.id  === action.id ? [...robot, action.id] : null)
+        case UPDATE_ROBOT_INFORMATION:
+              return {...state, robots: state.robots.map(( robot) => {
+                if(robot.id === action.id){
+                  return [...robot, action.id]
+                } else {
+                  return robot
+                }
+              })}
+
     default:
       return state;
   }
 };
 
 export default robotsReducer;
+
+
+/*
+filter
+map
+form all stake a handlick
+*/

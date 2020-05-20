@@ -45,7 +45,7 @@ render() {
         <div className="form-group">
           <label htmlFor="deadline">Deadline Date</label>
           <input
-            type="text"
+            type="date"
             className="form-control"
             value={this.props.project.deadline}
             onChange={this.handleChange}

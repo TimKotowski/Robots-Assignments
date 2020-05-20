@@ -33,6 +33,7 @@ export class SingleRobots extends Component {
           <h4 className="card-text" style={{ color: '#0d0d0d' }}>
           Fuel Level: {robot.fuelLevel}
           </h4>
+
         </div>
       </div>
     );
@@ -50,3 +51,12 @@ const mapDispatch = (dispatch) => ({
 export default connect(mapState, mapDispatch)(SingleRobots);
 
 // already an onject dont need ot map just descrttuce
+// we rerate prject and robot
+// we assign the prject and robot together
+
+//form
+// have a form that has prefilled data,
+// single robot comp with edit botom comp
+// make it its  own view
+// make sepetate routes
+//

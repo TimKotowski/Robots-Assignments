@@ -56,9 +56,9 @@ export const fetchCreatedProject = (projectInfo) => async (dispatch) => {
 
 export const fetchDeletedProject = projectId => async(dispatch) => {
   try {
-    const {data: projectInfo} = await axios.delete(`/api/projects/${projectId}`, projectId)
-    dispatch(deleteProjectForm(projectInfo))
-
+        // dont need a const with data in here becaseu the axios is lareadying deleting it so just dispatch it
+   await axios.delete(`/api/projects/${projectId}`, projectId)
+    dispatch(deleteProjectForm(projectId))
   } catch (error) {
     console.log('you have an error in your project delete route thunk creator', error)
   }

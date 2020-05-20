@@ -29,7 +29,7 @@ handleDelete(robotId){
     console.log('projects', this.props.projects);
     return (
       <div className="container">
-        {/* <ProjectInputForm /> */}
+        <ProjectInputForm />
         {this.props.projects.map((project) => (
           <div key={project.id}  className="card"  >
             <div  className="card ">
@@ -42,6 +42,7 @@ handleDelete(robotId){
                   <h3  style={{ color: '#0d0d0d' }}  >Deadline: {project.deadline}</h3>
                   <button onClick={() => this.handleDelete(project.id)}     type="button"   value="Remove text input "className="btn btn-danger " style={{width: '2.4rem', height: '2.2rem' }}>X</button>
               </div>
+              {/* {project.id ? <EditProject project={project} key={project.id} /> : <ProjectInputForm key={project.id} project={project} />} */}
             </div>
           </div>
         ))}
