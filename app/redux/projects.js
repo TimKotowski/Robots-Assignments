@@ -3,7 +3,11 @@ import axios from 'axios';
 const initialState = {
   projects: [],
   userInfo: {
-    title: ''
+    title: '',
+    deadline: '',
+    description: '',
+    completed: '',
+    priority: ''
   }
 };
 

@@ -16,10 +16,14 @@ export  class ProjectInputForm extends Component {
 
   handleSubmit(e){
     e.preventDefault();
-    const {title} = this.props.project
+    const {title, deadline, description, completed, priority} = this.props.project
     this.props.createdProject({
-      title
-    })
+      title,
+      deadline,
+      description,
+      completed,
+      priority
+    });
   }
 
 
@@ -39,7 +43,7 @@ render() {
             />
         </div>
         <div className="form-group">
-          <label htmlFor="deadline">Proposed Deadline</label>
+          <label htmlFor="deadline">Deadline Date</label>
           <input
             type="text"
             className="form-control"
@@ -61,13 +65,23 @@ render() {
             />
         </div>
         <div className="form-group">
-          <label htmlFor="description">Project Description</label>
+          <label htmlFor="description">Description</label>
           <input
             type="text"
             className="form-control"
             value={this.props.project.description}
             onChange={this.handleChange}
             name="description"
+            />
+        </div>
+        <div className="form-group">
+          <label htmlFor="completed">Type True for Completed, Otherwise False</label>
+          <input
+            type="text"
+            className="form-control"
+            value={this.props.project.completed}
+            onChange={this.handleChange}
+            name="completed"
             />
         </div>
         <button type="submit" className="btn btn-primary">
