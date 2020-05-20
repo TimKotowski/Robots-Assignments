@@ -14,21 +14,27 @@ const initialState = {
 const GET_ALL_PROJECTS = 'GET_ALL_PROJECTS';
 const CREATE_PROJECT_INFO = 'CREATE_PROJECT_FORM';
 const UPDATE_PROJECT_FORM = 'UPDATE_PROJECT_FORM ';
+const DELETE_PROJECT_FORM = 'DELETE_PROJECT_FORM'
 
 export const getAllProjects = (projects) => ({
   type: GET_ALL_PROJECTS,
   projects,
 });
 
-export const updateProjectForm = (e) => ({
+export const updateProjectForm = e => ({
   type: UPDATE_PROJECT_FORM,
   e,
 });
 
-export const createdProjectInfo = (userInfo) => ({
+export const createdProjectInfo = userInfo => ({
   type: CREATE_PROJECT_INFO,
   userInfo,
 });
+
+export const deleteProjectForm = projectId => ({
+  type: DELETE_PROJECT_FORM,
+  projectId
+})
 
 export const fetchAllProjects = () => async (dispatch) => {
   try {
@@ -48,6 +54,16 @@ export const fetchCreatedProject = (projectInfo) => async (dispatch) => {
   }
 };
 
+export const fetchDeletedProject = projectId => async(dispatch) => {
+  try {
+    const {data: projectInfo} = await axios.delete(`/api/projects/${projectId}`, projectId)
+    dispatch(deleteProjectForm(projectInfo))
+
+  } catch (error) {
+    console.log('you have an error in your project delete route thunk creator', error)
+  }
+}
+
 // Take a look at app/redux/index.js to see where this reducer is
 // added to the Redux store with combineReducers
 const projectsReducer = (state = initialState, action) => {
@@ -58,6 +74,8 @@ const projectsReducer = (state = initialState, action) => {
       return {...state, userInfo: {...state.userInfo, [action.e.target.name]: action.e.target.value  }}
       case CREATE_PROJECT_INFO:
         return {...state, projects: [...state.projects, action.userInfo]}
+        case DELETE_PROJECT_FORM:
+          return {...state, projects: state.projects.filter((project => project.id !== action.projectId))}
     default:
       return state
   }

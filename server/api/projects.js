@@ -63,7 +63,7 @@ router.put('/:projectId', async (req, res, next) => {
 });
 
 // api/projects/:projectId
-router.delete('/projectId', async (req, res, next) => {
+router.delete('/:projectId', async (req, res, next) => {
   try {
     const id = req.params.projectId;
     const deleteProject = await Project.destroy({

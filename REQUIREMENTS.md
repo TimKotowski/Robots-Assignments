@@ -56,12 +56,13 @@ Congrats! You have completed your first vertical slice! Make sure to `commit -m 
 
 - Write a component to display a single project with the following information:
   - [X] The project's title, deadline, priority, description
+  // TODO: get back later
   - [ ] A list of the names of all robots in that project (or a helpful message if it doesn't have any robots)
 - [X] Display the appropriate project's info when the url matches `/projects/:projectId`
 - [X] Clicking on a project from the all-projects view should navigate to show that project in the single-project view
 
 - [X] Clicking on the name of a robot in the single-project view should navigate to show that robot in the single-robot view
-- [] Clicking on the name of a project in the single-robot view should navigate to show that project in the single-project view
+- [X] Clicking on the name of a project in the single-robot view should navigate to show that project in the single-project view
 
 #### Backend
 
@@ -85,8 +86,8 @@ Congrats! You have completed your second vertical slice! Make sure to `commit -m
   - [X] Make an AJAX request that causes the new robot to be persisted in the database
   - [X] Add the new robot to the list of robots without needing to refresh the page
 
-// TODO: BUG FIRST THING TO START
-- [] Write a component to display a form for adding a new project that contains _at least_ an input for title
+
+- [X] Write a component to display a form for adding a new project that contains _at least_ an input for title
 - [X] Make an AJAX request that causes the new project to be saved to the database
   - [X] Add the new project to the list of projects without needing to refresh the page
 
@@ -107,18 +108,21 @@ Congrats! You have completed your third vertical slice! Make sure to `commit -m 
 
 - [X] In the all-robots view, include an `X` button next to each robot
 - Clicking the `X` button should:
-  - [ ] Make an AJAX request that causes that robot to be removed from database
-  - [ ] Remove the robot from the list of robots without needing to refresh the page
+  - [X] Make an AJAX request that causes that robot to be removed from database
 
-- [ ] In the all-projects view, include an `X` button next to each project
+  // TODO: get back to later
+  - [] Remove the robot from the list of robots without needing to refresh the page
+
+- [X] In the all-projects view, include an `X` button next to each project
 - Clicking the `X` button should:
-  - [ ] Make an AJAX request that causes that project to be removed from database
+  - [X] Make an AJAX request that causes that project to be removed from database
+  // TODO: get abck later
   - [ ] Remove the project from the list of projects without needing to refresh the page
 
 #### Backend
 
-- [ ] Write a route to remove a robot (based on its id)
-- [ ] Write a route to remove a project (based on its id)
+- [X] Write a route to remove a robot (based on its id)
+- [X] Write a route to remove a project (based on its id)
 
 Congrats! You have completed your fourth vertical slice! Make sure to `commit -m "Feature: Remove Robot and Project"` before moving on (see RUBRIC.md - points are awarded/deducted for a proper git workflow)!
 

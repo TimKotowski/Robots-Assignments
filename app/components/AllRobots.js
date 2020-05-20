@@ -9,21 +9,17 @@ import RobotInputForm from './RobotInputForm'
 export class AllRobots extends Component {
   constructor(){
     super()
-    // this.deleteRobot = this.deleteRobot.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
     this.props.loadRobots();
-
   }
 
-  // handleDelete(){
-  //   const {imageUrl, fuelType, fuelLevel, name } = this.props.robots
-  //   this.props.deletedRobotFromDB({
-  //     imageUrl, fuelLevel, fuelType
-  //   })
+  handleDelete(robotId){
+    this.props.deletedRobotFromDB(robotId)
 
-  // }
+  }
 
   render() {
     console.log('robots', this.props.robots);
@@ -42,7 +38,7 @@ export class AllRobots extends Component {
               <h2 className="card-title">{robot.name}</h2>
               <h3 className="card-text"  style={{ color: '#0d0d0d' }}  >Fuel Type: {robot.fuelType}</h3>
               <h3 className="card-text"   style={{ color: '#0d0d0d' }}  >Fuel Level: {robot.fuelLevel}</h3>
-            <button onClick={() => this.props.deletedRobotFromDB(robot.id)}   type="button"  value="Remove text input "className="btn btn-danger " style={{width: '2.4rem', height: '2.2rem' }}>X</button>
+            <button onClick={() => this.handleDelete(robot.id)}   type="button"  value="Remove text input "className="btn btn-danger " style={{width: '2.4rem', height: '2.2rem' }}>X</button>
             </div>
           </div>
         ))}

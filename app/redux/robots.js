@@ -36,8 +36,11 @@ export const deleteRobotUser = robot => ({
 // fetchRobots for test to
 export const fetchAllRobots = () => async (dispatch) => {
   try {
+    console.log('geting all')
     const { data: robots } = await axios.get('/api/robots');
+    console.log(' all')
     dispatch(getAllRobots(robots));
+    console.log('getiall')
   } catch (error) {
     console.log('error in fetchRobots', error);
   }
@@ -54,13 +57,15 @@ export const fetchNewRobot = robotInfo => async (dispatch) => {
 
 export const fetchDeletedRobot = robotId => async(dispatch) => {
   try {
-      const {data: robot} = await axios.delete(`/api/robots/${robotId}`, robotId)
-      dispatch(deleteRobotUser(robot))
+    console.log("hitting")
+    const {data: robot} = await axios.delete(`/api/robots/${robotId}`, robotId)
+    console.log("sd")
+    dispatch(deleteRobotUser(robot))
+    console.log("d")
   } catch (error) {
     console.log('error in fetchDelete thunk creator', error)
   }
 }
-
 
 
 const robotsReducer = (state = initialState, action) => {
@@ -72,6 +77,7 @@ const robotsReducer = (state = initialState, action) => {
     case CREATE_ROBOT_INFO:
       return { ...state, robots: [...state.robots, action.robotInfo] };
       case DELETE_ROBOT:
+        // console.log(JSON.stringify({...state, robots: state.robots.filter(robot => robot.id !== action.robot)}))
         return {...state, robots: state.robots.filter(robot => robot.id !== action.robot)}
     default:
       return state;
