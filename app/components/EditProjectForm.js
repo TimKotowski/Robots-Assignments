@@ -1,26 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCreatedProject, updateProjectForm } from '../redux/projects';
+import {fetchUpdatedForm, setUpdatedForm } from '../redux/projects';
 
-export class ProjectInputForm extends Component {
-  constructor() {
-    super();
+export class EditProjectForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    title: this.props.projectInfo.title,
+    deadline: this.props.projectInfo.deadline,
+    description: this.props.projectInfo.description,
+    completed: this.props.projectInfo.completed,
+    priority: this.props.projectInfo.priority,
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
-    this.props.updateProject(e);
-    e.persist();
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const {title, deadline, description, completed, priority} = this.props.project;
-    this.props.createdProject({ title, deadline, description, completed, priority});
+    const id = this.props.projectInfo.id
+    const {title, deadline, description, completed, priority} = this.state;
+    this.props.createProject({ title, deadline, description, completed, priority}, id);
   }
 
   render() {
+    console.log(this.props.projectInfo)
+    const {description, deadline, title, completed, priority} = this.state
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit}>
@@ -29,7 +40,7 @@ export class ProjectInputForm extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.props.project.title}
+              value={title}
               onChange={this.handleChange}
               name="title"
             />
@@ -39,7 +50,7 @@ export class ProjectInputForm extends Component {
             <input
               type="date"
               className="form-control"
-              value={this.props.project.deadline}
+              value={deadline}
               onChange={this.handleChange}
               name="deadline"
             />
@@ -51,7 +62,7 @@ export class ProjectInputForm extends Component {
               className="form-control"
               min={1}
               max={10}
-              value={this.props.project.priority}
+              value={priority}
               onChange={this.handleChange}
               name="priority"
             />
@@ -61,7 +72,7 @@ export class ProjectInputForm extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.props.project.description}
+              value={description}
               onChange={this.handleChange}
               name="description"
             />
@@ -73,12 +84,12 @@ export class ProjectInputForm extends Component {
             <input
               type="text"
               className="form-control"
-              value={this.props.project.completed}
+              value={completed}
               onChange={this.handleChange}
               name="completed"
             />
           </div>
-          <button  disabled={!this.props.project.title || !this.props.project.deadline || !this.props.project.priority || !this.props.project.description || !this.props.project.completed }  type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </form>
@@ -88,12 +99,12 @@ export class ProjectInputForm extends Component {
 }
 
 const mapState = (state) => ({
-  project: state.allProjects.userInfo,
+  projectInfo: state.projectInfo.singleProjectInfo
 });
 
 const mapDispatch = (dispatch) => ({
-  updateProject: (e) => dispatch(updateProjectForm(e)),
-  createdProject: (info) => dispatch(fetchCreatedProject(info)),
+  // updateProject: (info) => dispatch(setUpdatedForm(info)),
+  createProject: (project, id) => dispatch(fetchUpdatedForm(project, id)),
 });
 
-export default connect(mapState, mapDispatch)(ProjectInputForm);
+export default connect(mapState, mapDispatch)(EditProjectForm);

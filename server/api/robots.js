@@ -30,46 +30,51 @@ router.get('/:robotId', async (req, res, next) => {
 // api/robots
 router.post('/', async (req, res, next) => {
   try {
+    //  const { name, fuelType, fuelLevel, imageUrl } = req.body;
+  // // console.log('started handler')
+  // console.log(JSON.stringify(req.body));
+  // const robot = await Robot.create({
+  //   name,
+  //   imageUrl,
+  //   fuelType,
+  //   fuelLevel,
+  // });
+
+  // res.json(robot);
+
+  console.log(JSON.stringify(req.body))
+    const {name, fuelType, fuelLevel, imageUrl} = req.body
+    const robot = await Robot.findOrCreate({
+      where: {
+        name,
+        fuelLevel,
+        imageUrl,
+        fuelType
+      }
+    })
+
+    const currentRobot = await Robot.findByPk(req.body.projectId);
+    await currentRobot.setRobots(robot[0]);
+    res.json(robot[0]);
+
+    // if (!fuelType){
+    //   res.send({fuelType: 'electric'})
+    // }
+    // const {title, deadline, priority, completed, description} = req.body
+    // const [project, created] = await Project.findOrCreate({
+    //   where: {
+    //     title,
+    //     deadline,
+    //     priority,
+    //     completed,
+    //     description
+    //   }
+    // })
+
+    // await robot.addProjects(project)
 
 
-     const { name, fuelType, fuelLevel, imageUrl } = req.body;
-  // console.log('started handler')
-  console.log(JSON.stringify(req.body));
-  const robot = await Robot.create({
-    name,
-    imageUrl,
-    fuelType,
-    fuelLevel,
-  });
-
-  res.json(robot);
-
-    // const {name, fuelType, fuelLevel, imageUrl} = req.body
-    // console.log(JSON.stringify(req.body))
-    //   const [robot, createdAt] = await Robot.findOrCreate({
-    //     where: {
-    //       name,
-    //       fuelType,
-    //       fuelLevel,
-    //       imageUrl,
-    //     }
-    //   })
-
-    //   const {title, deadline, priority, completed, description} = req.body
-    //   const [project, created] = await Project.findOrCreate({
-    //     where: {
-    //       title,
-    //       deadline,
-    //       priority,
-    //       completed,
-    //       description
-
-    //     }
-    //   })
-
-    //   await robot.setProjects(project)
-
-    //   res.json(robot)
+    // res.json(robot)
 
   } catch (error) {
     console.log('post', error);

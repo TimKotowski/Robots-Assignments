@@ -1,35 +1,32 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const initialState = {
-  singleProjectInfo: {}
-}
+  singleProjectInfo: {},
+};
 
-const GET_PROJECT_INFO = 'GET_PROJECT_INFO'
+const GET_PROJECT_INFO = 'GET_PROJECT_INFO';
 
-
-export const getProjectInfo = project => ({
+export const getProjectInfo = (project) => ({
   type: GET_PROJECT_INFO,
-  project
-})
+  project,
+});
 
-
-export const fetchSingleProject = (projectId) => async(dispatch) => {
+export const fetchSingleProject = (projectId) => async (dispatch) => {
   try {
-    const {data: project} = await axios.get(`/api/projects/${projectId}`)
-    dispatch(getProjectInfo(project))
+    const { data: project } = await axios.get(`/api/projects/${projectId}`);
+    dispatch(getProjectInfo(project));
   } catch (error) {
-    console.log("failed to fetch singleProject info", error)
+    console.log('failed to fetch singleProject info', error);
   }
-}
+};
 
 const singleProjectReducer = (state = initialState, action) => {
-  switch (action.type){
+  switch (action.type) {
     case GET_PROJECT_INFO:
-      return {...state, singleProjectInfo: action.project}
+      return { ...state, singleProjectInfo: action.project };
     default:
-      return state
+      return state;
   }
+};
 
-}
-
-export default singleProjectReducer
+export default singleProjectReducer;

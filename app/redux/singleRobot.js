@@ -12,6 +12,7 @@ export const getRobotInfo = robot => ({
   robot
 })
 
+
 export const fetchSingleRobot = (robotId) => async(dispatch) => {
   try {
     const {data: robot} = await axios.get(`/api/robots/${robotId}`)
@@ -29,9 +30,6 @@ const singleRobotReducer = (state = initialState, action) => {
       return state
   }
 
-
 }
 
 export default singleRobotReducer
-// return [
-

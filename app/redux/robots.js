@@ -15,7 +15,7 @@ const GET_ALL_ROBOTS = 'GET_ALL_ROBOTS';
 const CREATE_ROBOT_INFO = 'CREATE_ROBOT_INFO';
 const UPDATE_ROBOT_FORM = 'UPDATE_ROBOT_FORM';
 const DELETE_ROBOT = 'DELETE_ROBOT'
-// const UPDATE_FORM = 'UPDATE_FORM'
+const UPDATE_FORM = 'UPDATE_FORM'
 
 export const getAllRobots = robots => ({
   type: GET_ALL_ROBOTS,
@@ -39,13 +39,12 @@ export const deleteRobotUser = id => ({
 })
 
 
-// export const updateRobotInfo = robot => ({
-//   type: UPDATE_FORM,
-//   robot
-// })
+export const updateRobotInfo = robot => ({
+  type: UPDATE_FORM,
+  robot
+})
 
 
-// fetchRobots for test to
 export const fetchAllRobots = () => async (dispatch) => {
   try {
     const { data: robots } = await axios.get('/api/robots');
@@ -54,10 +53,14 @@ export const fetchAllRobots = () => async (dispatch) => {
     console.log('error in fetchRobots', error);
   }
 };
+
 export const fetchNewRobot = robotInfo => async (dispatch) => {
   try {
+    console.log('s', robotInfo)
     const { data: newRobot } = await axios.post('/api/robots', robotInfo);
+    console.log('fetched the data')
     dispatch(createRobotInfo(newRobot));
+    console.log('data passing into the action creator')
   } catch (error) {
     console.log('error in fetchrobots post', error);
   }
@@ -74,14 +77,17 @@ export const fetchDeletedRobot = robotId => async(dispatch) => {
   }
 }
 
-// export const fetchUpdatedRobot = robotId => async(dispatch) => {
-//   try {
-//    const {data: id} = await axios.put(`/api/robots/${robotId}`, robotId)
-//     dispatch(updateRobotInfo(id))
-//   } catch (error) {
-//     console.log('error in fetch updated thunk creator', error)
-//   }
-// }
+export const fetchUpdatedRobot = (robot, robotId) => async(dispatch) => {
+  try {
+    console.log('s')
+    const {data: updatedRobot} = await axios.put(`/api/robots/${robotId}`, robot)
+    console.log('hitit')
+    dispatch(updateRobotInfo(updatedRobot))
+    console.log('hitit')
+  } catch (error) {
+    console.log('error in fetch updated thunk creator', error)
+  }
+}
 
 const robotsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -96,16 +102,14 @@ const robotsReducer = (state = initialState, action) => {
         ...state,
         robots: state.robots.filter((robot) => robot.id !== action.id),
       };
-    // case UPDATE_FORM:
-    //   console.log('update');
-    //   return {
-    //     ...state,
-    //     robots: state.robots.map((robot) => {
-    //       if (robot.id === action.robot) return action.robot;
-    //       return robot;
-    //     }),
-    //   };
-
+    case UPDATE_FORM:
+      return {
+        ...state,
+        robots: state.robots.map((robot) => {
+          if (robot.id === action.robot.id) return action.robot;
+          return robot;
+        }),
+      };
     default:
       return state;
   }
@@ -114,19 +118,9 @@ const robotsReducer = (state = initialState, action) => {
 
 // You have a form, when the page loads and you load an existing robot, you want to
 // prefill out this form with the existing robot data.
-//
 // User will then make modifications to the form
-//
 // User then clicks submit, and you want to take the form data, along with the ID
-// of the robot that's being updated, and submit that to your handler or whatever
-// that handles updating the info for the robot with the given ID
+// of the robot that's being updated, and submit that to my reducer
+// that redcuer updating the info for the robot with the given ID
 
 export default robotsReducer;
-
-
-/*
-filter
-map
-form all stake a handlick
-// console.log(JSON.stringify({...state, robots: state.robots.filter(robot => robot.id !== action.robot)})
-*/

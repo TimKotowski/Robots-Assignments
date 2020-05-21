@@ -17,19 +17,18 @@ export class RobotInputForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { name, imageUrl, fuelLevel } = this.props.userInfo;
+    const { name, imageUrl, fuelLevel} = this.props.userInfo;
     this.props.createRobot({
       name,
       imageUrl,
       fuelLevel
     });
-
   }
 
   render() {
     console.log(this.props.userInfo);
     return (
-      <div  className="container" >
+      <div className="container">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Give Robot a Name!</label>
@@ -42,7 +41,7 @@ export class RobotInputForm extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="imageUrl">Give Robot a Name!</label>
+            <label htmlFor="imageUrl">Provide an Image</label>
             <input
               type="text"
               className="form-control"
@@ -53,17 +52,26 @@ export class RobotInputForm extends Component {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="fuelLevel">fuelLevel</label>
+            <label htmlFor="fuelLevel">Select Fuel Level</label>
             <input
               type="number"
+              min={1}
+              max={100}
               className="form-control"
               value={this.props.userInfo.fuelLevel}
               onChange={this.handleChange}
               name="fuelLevel"
             />
           </div>
-
-          <button type="submit" className="btn btn-primary">
+          {/* <div className="form-group">
+          <label className="mr-sm-2" htmlFor="fuelType">Preference</label>
+             <select onChange={this.handleChange} className="custom-select mr-sm-2" id="inlineFormCustomSelect">
+            <option  name="fuelType"   value={this.props.userInfo.fuelType}>Gas</option>
+           <option  name="fuelType"   value={this.props.userInfo.fuelType}>Diesel</option>
+            <option  name="fuelType"  value={this.props.userInfo.fuelType}>Electric</option>
+      </select>
+          </div> */}
+          <button type="submit"  disabled={!this.props.userInfo.fuelLevel || !this.props.userInfo.imageUrl || !this.props.userInfo.name }  className="btn btn-primary">
             Submit
           </button>
         </form>

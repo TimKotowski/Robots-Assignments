@@ -14,27 +14,33 @@ const initialState = {
 const GET_ALL_PROJECTS = 'GET_ALL_PROJECTS';
 const CREATE_PROJECT_INFO = 'CREATE_PROJECT_FORM';
 const UPDATE_PROJECT_FORM = 'UPDATE_PROJECT_FORM ';
-const DELETE_PROJECT_FORM = 'DELETE_PROJECT_FORM'
+const DELETE_PROJECT_FORM = 'DELETE_PROJECT_FORM';
+const SET_UPDATED_FORM = 'SET_UPDATED_FORM';
 
 export const getAllProjects = (projects) => ({
   type: GET_ALL_PROJECTS,
   projects,
 });
 
-export const updateProjectForm = e => ({
+export const updateProjectForm = (e) => ({
   type: UPDATE_PROJECT_FORM,
   e,
 });
 
-export const createdProjectInfo = userInfo => ({
+export const createdProjectInfo = (userInfo) => ({
   type: CREATE_PROJECT_INFO,
   userInfo,
 });
 
-export const deleteProjectForm = projectId => ({
+export const deleteProjectForm = (projectId) => ({
   type: DELETE_PROJECT_FORM,
-  projectId
-})
+  projectId,
+});
+
+export const setUpdatedForm = (project) => ({
+  type: SET_UPDATED_FORM,
+  project,
+});
 
 export const fetchAllProjects = () => async (dispatch) => {
   try {
@@ -49,20 +55,28 @@ export const fetchCreatedProject = (projectInfo) => async (dispatch) => {
   try {
     const { data: newProject } = await axios.post('/api/projects', projectInfo);
     dispatch(createdProjectInfo(newProject));
-  } catch (error) {
-    console.log('you have an error in your Project Post route thunk creator', error);
+  } catch (error) { console.log('you have an error in your Project Post route thunk creator', error);
   }
 };
 
-export const fetchDeletedProject = projectId => async(dispatch) => {
+export const fetchDeletedProject = (projectId) => async (dispatch) => {
   try {
-        // dont need a const with data in here becaseu the axios is lareadying deleting it so just dispatch it
-   await axios.delete(`/api/projects/${projectId}`, projectId)
-    dispatch(deleteProjectForm(projectId))
+    // dont need a const with data in here becaseu the axios is lareadying deleting it so just dispatch it
+    await axios.delete(`/api/projects/${projectId}`, projectId);
+    dispatch(deleteProjectForm(projectId));
   } catch (error) {
-    console.log('you have an error in your project delete route thunk creator', error)
+    console.log('you have an error in your project delete route thunk creator', error);
   }
-}
+};
+export const fetchUpdatedForm = (project, projectId) => async (dispatch) => {
+  try {
+    // dont need a const with data in here becaseu the axios is lareadying deleting it so just dispatch it
+    const {data: updatedProject } = await axios.put(`/api/projects/${projectId}`, project);
+    dispatch(setUpdatedForm(updatedProject));
+  } catch (error) {
+    console.log('you have an error in your project delete route thunk creator', error);
+  }
+};
 
 // Take a look at app/redux/index.js to see where this reducer is
 // added to the Redux store with combineReducers
@@ -76,6 +90,14 @@ const projectsReducer = (state = initialState, action) => {
         return {...state, projects: [...state.projects, action.userInfo]}
         case DELETE_PROJECT_FORM:
           return {...state, projects: state.projects.filter((project => project.id !== action.projectId))}
+          case SET_UPDATED_FORM:
+            return {
+              ...state,
+              projects: state.projects.map((project) => {
+                if (project.id === action.project.id) return action.project
+                return project
+              })
+            }
     default:
       return state
   }

@@ -31,32 +31,48 @@ router.get('/:projectId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
 
-    const {title, deadline, priority, completed, description} = req.body
-    console.log(JSON.stringify(req.body))
-    const [project, createdAt] = await Project.findOrCreate({
-      where: {
-        title,
-        deadline,
-        priority,
-        completed,
-        description
 
-      }
-    })
 
-    const {name, fuelType, fuelLevel, imageUrl} = req.body
-      const [robot, created] = await Robot.findOrCreate({
-        where: {
-          name,
-          imageUrl,
-          fuelType,
-          fuelLevel
-        }
-      })
+// const { title, deadline, priority, description, completed } = req.body;
+//     const createProject = await Project.create({
+//       title,
+//       deadline,
+//       priority,
+//       description,
+//       completed,
+//     });
 
-      await project.setRobots(robot)
+//     res.json(createProject);
+const {title, deadline, priority, completed, description} = req.body
+console.log(JSON.stringify(req.body))
+const project = await Project.create({
+  where: {
+    title,
+    deadline,
+    priority,
+    completed,
+    description
 
-      res.json(project)
+  }
+})
+const currentProject = await Robot.findByPk(req.body.robotId);
+await currentProject.addProject(project[0]);
+res.json(project[0]);
+// console.log(Object.keys(current.__proto__));
+
+    // const {name, fuelType, fuelLevel, imageUrl} = req.body
+    //   const [robot, created] = await Robot.findOrCreate({
+    //     where: {
+    //       name,
+    //       imageUrl,
+    //       fuelType,
+    //       fuelLevel
+    //     }
+    //   })
+
+      // await project.addRobots(robot)
+
+      // res.json(project)
   } catch (error) {
     next(error);
   }

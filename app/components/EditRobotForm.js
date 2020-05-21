@@ -1,44 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchUpdatedRobot, updateRobotForm, updateRobotInfo } from '../redux/robots';
+import {fetchUpdatedRobot, updateRobotForm } from '../redux/robots';
 
 export class EditRobotForm extends Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
+    console.log('props', props)
+    this.state = {
+      name: this.props.robotInfo.name,
+      fuelLevel: this.props.robotInfo.fuelLevel,
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+// do some changing
   handleChange(e) {
-    const {id, name, fuelLevel} = this.props.robotInfo
-    this.props.updateRobot(id, name, fuelLevel)
-    e.persist()
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const {name, fuelLevel} = this.props.robotInfo.id
-    this.props.createRobot({
-      name,
-      fuelLevel
-
-    });
-
+    const id = this.props.robotInfo.id
+    const { name, fuelLevel } = this.state;
+    this.props.createRobot({name, fuelLevel}, id);
   }
 
-  render() {
-    console.log(this.props.robotInfo);
 
+  render() {
+   const {name, fuelLevel} = this.state
+    console.log(this.props.robotInfo)
     return (
-      <div  className="container" >
+      <div className="container">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Give Robot a Name!</label>
             <input
               type="text"
               className="form-control"
-              value={this.props.robotInfo.name}
+              value={name}
               onChange={this.handleChange}
               name="name"
             />
@@ -48,13 +51,12 @@ export class EditRobotForm extends Component {
             <input
               type="number"
               className="form-control"
-              value={this.props.robotInfo.fuelLevel}
+              value={fuelLevel}
               onChange={this.handleChange}
               name="fuelLevel"
             />
           </div>
-
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" value="submit" className="btn btn-primary">
             Submit
           </button>
         </form>
@@ -65,15 +67,12 @@ export class EditRobotForm extends Component {
 
 const mapState = (state) => ({
   robotInfo: state.robotInfo.singleRobotInfo,
-  // userInfo: state.allRobots.user,
+
 });
 
 const mapDispatch = (dispatch) => ({
   updateRobot: (info) => dispatch(updateRobotForm(info)),
-  createRobot: (robot) => dispatch(fetchUpdatedRobot(robot)),
+  createRobot: (robot, id) => dispatch(fetchUpdatedRobot(robot, id)),
 });
 
 export default connect(mapState, mapDispatch)(EditRobotForm);
-
-
-

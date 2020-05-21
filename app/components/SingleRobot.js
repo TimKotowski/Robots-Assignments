@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleRobot } from '../redux/singleRobot';
-import EditRobotForm  from './EditRobotForm';
-
+import EditRobotForm from './EditRobotForm';
 
 export class SingleRobots extends Component {
   componentDidMount() {
@@ -13,33 +12,31 @@ export class SingleRobots extends Component {
   render() {
     const { robot } = this.props;
     return (
-      <div  className="container">
-      <EditRobotForm />
-      <div className="card" style={{ width: '18rem' }}>
-        <div
-          key={robot.id}
-          className="card-body"
-          style={{ backgroundColor: '#8c8c8c' }}
-          >
-          <img
-            className="card-img-top"
-            style={{ fontWeight: 'bold' }}
-            src={`${robot.imageUrl}`}
-            alt="Card image cap"
+      <div className="container">
+        <EditRobotForm />
+        <div className="card" style={{ width: '18rem' }}>
+          <div
+            key={robot.id}
+            className="card-body"
+            style={{ backgroundColor: '#8c8c8c' }}>
+            <img
+              className="card-img-top"
+              style={{ fontWeight: 'bold' }}
+              src={`${robot.imageUrl}`}
+              alt="Card image cap"
             />
-          <h5 className="card-title" style={{ fontWeight: 'bold' }}>
-            {robot.name}
-          </h5>
-          <h4 className="card-text" style={{ color: '#0d0d0d' }}>
-            Fueld Type: {robot.fuelType}
-          </h4>
-          <h4 className="card-text" style={{ color: '#0d0d0d' }}>
-          Fuel Level: {robot.fuelLevel}
-          </h4>
-
+            <h5 className="card-title" style={{ fontWeight: 'bold' }}>
+              {robot.name}
+            </h5>
+            <h4 className="card-text" style={{ color: '#0d0d0d' }}>
+              Fueld Type: {robot.fuelType}
+            </h4>
+            <h4 className="card-text" style={{ color: '#0d0d0d' }}>
+              Fuel Level: {robot.fuelLevel}
+            </h4>
+          </div>
         </div>
       </div>
-            </div>
     );
   }
 }

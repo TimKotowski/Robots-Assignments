@@ -11,8 +11,8 @@ const Robot = require('./robot')
 // getRobot
 // Project.hasMany(Robot)
 // Robot.belongsTo(Project)
-Project.belongsToMany(Robot, {through: 'projects_robots_like'})
 Robot.belongsToMany(Project, {through: 'projects_robots_like'})
+Project.belongsToMany(Robot, {through: 'projects_robots_like'})
 
 // Project.belongsTo(Robot)
 // Robot.hasMany(Project)
