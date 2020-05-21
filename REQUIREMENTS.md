@@ -110,14 +110,13 @@ Congrats! You have completed your third vertical slice! Make sure to `commit -m 
 - Clicking the `X` button should:
   - [X] Make an AJAX request that causes that robot to be removed from database
 
-  // TODO: get back to later
-  - [] Remove the robot from the list of robots without needing to refresh the page
+  - [X] Remove the robot from the list of robots without needing to refresh the page
 
 - [X] In the all-projects view, include an `X` button next to each project
 - Clicking the `X` button should:
   - [X] Make an AJAX request that causes that project to be removed from database
-  // TODO: get abck later
-  - [ ] Remove the project from the list of projects without needing to refresh the page
+
+  - [X] Remove the project from the list of projects without needing to refresh the page
 
 #### Backend
 
@@ -135,7 +134,7 @@ Congrats! You have completed your fourth vertical slice! Make sure to `commit -m
 #### Frontend
 
 - [ ] Write a component to display a form updating _at least_ a robot's name and fuelLevel
-- [ ] Display this component EITHER as part of the single-robot view, or as its own view
+- [X] Display this component EITHER as part of the single-robot view, or as its own view
 - Submitting the form with valid data should:
   - [ ] Make an AJAX request that causes that robot to be updated in the database
   - [ ] Update the robot in the current view without needing to refresh the page
@@ -151,8 +150,8 @@ Congrats! You have completed your fourth vertical slice! Make sure to `commit -m
 
 #### Backend
 
-- [ ] Write a route to update an existing project
-- [ ] Write a route to update an existing robot
+- [X]Write a route to update an existing project
+- [X] Write a route to update an existing robot
 
 
 Congrats! You have completed your fifth vertical slice! Make sure to `commit -m "Feature: Update Robot and Project"` before moving on (see RUBRIC.md - points are awarded/deducted for a proper git workflow)!

@@ -30,16 +30,33 @@ router.get('/:projectId', async (req, res, next) => {
 // api/projects
 router.post('/', async (req, res, next) => {
   try {
-    const { title, deadline, priority, description, completed } = req.body;
-    const createProject = await Project.create({
-      title,
-      deadline,
-      priority,
-      description,
-      completed,
-    });
 
-    res.json(createProject);
+    const {title, deadline, priority, completed, description} = req.body
+    console.log(JSON.stringify(req.body))
+    const [project, createdAt] = await Project.findOrCreate({
+      where: {
+        title,
+        deadline,
+        priority,
+        completed,
+        description
+
+      }
+    })
+
+    const {name, fuelType, fuelLevel, imageUrl} = req.body
+      const [robot, created] = await Robot.findOrCreate({
+        where: {
+          name,
+          imageUrl,
+          fuelType,
+          fuelLevel
+        }
+      })
+
+      await project.setRobots(robot)
+
+      res.json(project)
   } catch (error) {
     next(error);
   }
@@ -78,3 +95,15 @@ router.delete('/:projectId', async (req, res, next) => {
 });
 
 module.exports = router;
+
+
+// const { title, deadline, priority, description, completed } = req.body;
+//     const createProject = await Project.create({
+//       title,
+//       deadline,
+//       priority,
+//       description,
+//       completed,
+//     });
+
+//     res.json(createProject);

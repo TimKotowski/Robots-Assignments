@@ -18,7 +18,6 @@ const Routes = () => {
       <Route path="/robots/:robotId" component={SingleRobots} />
       <Route exact path="/projects" component={AllProjects} />
       <Route  path="/projects/:projectId" component={SingleProject} />
-      {/* <Route  path="/robotForm" component={RobotInputForm} /> */}
       <Route exact path="/" component={Homepage} />
       <Route>
         <div>

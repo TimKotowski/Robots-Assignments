@@ -30,17 +30,47 @@ router.get('/:robotId', async (req, res, next) => {
 // api/robots
 router.post('/', async (req, res, next) => {
   try {
-    const { name, fuelType, fuelLevel, imageUrl } = req.body;
-    // console.log('started handler')
-    console.log(JSON.stringify(req.body));
-    const robot = await Robot.create({
-      name,
-      imageUrl,
-      fuelType,
-      fuelLevel,
-    });
 
-    res.json(robot);
+
+     const { name, fuelType, fuelLevel, imageUrl } = req.body;
+  // console.log('started handler')
+  console.log(JSON.stringify(req.body));
+  const robot = await Robot.create({
+    name,
+    imageUrl,
+    fuelType,
+    fuelLevel,
+  });
+
+  res.json(robot);
+
+    // const {name, fuelType, fuelLevel, imageUrl} = req.body
+    // console.log(JSON.stringify(req.body))
+    //   const [robot, createdAt] = await Robot.findOrCreate({
+    //     where: {
+    //       name,
+    //       fuelType,
+    //       fuelLevel,
+    //       imageUrl,
+    //     }
+    //   })
+
+    //   const {title, deadline, priority, completed, description} = req.body
+    //   const [project, created] = await Project.findOrCreate({
+    //     where: {
+    //       title,
+    //       deadline,
+    //       priority,
+    //       completed,
+    //       description
+
+    //     }
+    //   })
+
+    //   await robot.setProjects(project)
+
+    //   res.json(robot)
+
   } catch (error) {
     console.log('post', error);
     next(error);
@@ -50,6 +80,7 @@ router.post('/', async (req, res, next) => {
 // api/robots/:robotId
 router.put('/:robotId', async (req, res, next) => {
   try {
+    console.log(JSON.stringify(req.body))
     const [robotCount, affectedRobot] = await Robot.update(req.body, {
       where: {
         id: req.params.robotId,
@@ -82,48 +113,63 @@ router.delete('/:robotId', async (req, res, next) => {
 module.exports = router;
 
 
-    //   const {title, deadline, completed, decription} = req.body
+//   const {title, deadline, completed, decription} = req.body
 
-    //  const createProject = await Project.create({
-    //    title,
-    //    deadline,
-    //    completed,
-    //    decription
+//  const createProject = await Project.create({
+  //    title,
+  //    deadline,
+  //    completed,
+  //    decription
 
-    //  })
+  //  })
 
-    //  await createRobot.setProject(createProject)
+  //  await createRobot.setProject(createProject)
 
 
-// estalbish a ocnenciton between two models
-// useing setLocation
+  // estalbish a ocnenciton between two models
+  // useing setLocation
 
-// TODO: KEEP THIS REVIEW LATER
-// const {name, fuelType, fuelLevel, imageUrl} = req.body
-//       // console.log('started handler')
-//       console.log(JSON.stringify(req.body))
-//       const [robot, createdAt] = await Robot.findOrCreate({
-//         where: {
-//           name,
-//           imageUrl,
-//           fuelType,
-//           fuelLevel
+  // TODO: KEEP THIS REVIEW LATER
+  // const {name, fuelType, fuelLevel, imageUrl} = req.body
+  // // console.log('started handler')
+  // console.log(JSON.stringify(req.body))
+  // const [robot, createdAt] = await Robot.findOrCreate({
+  //   where: {
+  //     name,
+  //     imageUrl,
+  //     fuelType,
+  //     fuelLevel
 
-//         }
-//       })
+  //   }
+  // })
 
-//       const {title, deadline, priority, completed, description} = req.body
-//       const [project, created] = await Project.findOrCreate({
-//         where: {
-//           title,
-//           deadline,
-//           priority,
-//           completed,
-//           description
+  // const {title, deadline, priority, completed, description} = req.body
+  // const [project, created] = await Project.findOrCreate({
+  //   where: {
+  //     title,
+  //     deadline,
+  //     priority,
+  //     completed,
+  //     description
 
-//         }
-//       })
+  //   }
+  // })
 
-//       await robot.setProjects(project)
+  // await robot.setProjects(project)
 
-//       res.json(robot)
+  // res.json(robot)
+
+
+  // // robot is being assigned a project
+
+  // const { name, fuelType, fuelLevel, imageUrl } = req.body;
+  // // console.log('started handler')
+  // console.log(JSON.stringify(req.body));
+  // const robot = await Robot.create({
+  //   name,
+  //   imageUrl,
+  //   fuelType,
+  //   fuelLevel,
+  // });
+
+  // res.json(robot);

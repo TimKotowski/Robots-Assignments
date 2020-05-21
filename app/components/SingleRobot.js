@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleRobot } from '../redux/singleRobot';
+import EditRobotForm  from './EditRobotForm';
 
 
 export class SingleRobots extends Component {
@@ -12,18 +13,20 @@ export class SingleRobots extends Component {
   render() {
     const { robot } = this.props;
     return (
+      <div  className="container">
+      <EditRobotForm />
       <div className="card" style={{ width: '18rem' }}>
         <div
           key={robot.id}
           className="card-body"
           style={{ backgroundColor: '#8c8c8c' }}
-        >
+          >
           <img
-            className="card-img-top    "
+            className="card-img-top"
             style={{ fontWeight: 'bold' }}
-            src={`https://robohash.org/${robot.imageUrl}`}
+            src={`${robot.imageUrl}`}
             alt="Card image cap"
-          />
+            />
           <h5 className="card-title" style={{ fontWeight: 'bold' }}>
             {robot.name}
           </h5>
@@ -36,6 +39,7 @@ export class SingleRobots extends Component {
 
         </div>
       </div>
+            </div>
     );
   }
 }

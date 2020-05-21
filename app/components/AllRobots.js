@@ -22,7 +22,7 @@ export class AllRobots extends Component {
   }
 
   render() {
-    console.log('robots', this.props.robots);
+    // console.log('robots', this.props.robots);
     return (
       <div className="container">
         <RobotInputForm />
@@ -31,7 +31,7 @@ export class AllRobots extends Component {
             <NavLink to={`/robots/${robot.id}`}>
               <img
                 className="card-img-top   "
-                src={`https://robohash.org/${robot.imageUrl}`}
+                src={`${robot.imageUrl}`}
                 />
             </NavLink>
             <div className="card-body" style={{  fontWeight: 'bold', backgroundColor: '#8c8c8c' }}>

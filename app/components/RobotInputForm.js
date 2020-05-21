@@ -17,9 +17,11 @@ export class RobotInputForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { name } = this.props.userInfo;
+    const { name, imageUrl, fuelLevel } = this.props.userInfo;
     this.props.createRobot({
-      name
+      name,
+      imageUrl,
+      fuelLevel
     });
 
   }
@@ -37,6 +39,27 @@ export class RobotInputForm extends Component {
               value={this.props.userInfo.name}
               onChange={this.handleChange}
               name="name"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="imageUrl">Give Robot a Name!</label>
+            <input
+              type="text"
+              className="form-control"
+              value={this.props.userInfo.imageUrl}
+              onChange={this.handleChange}
+              accept="image/png, image/jpeg"
+              name="imageUrl"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="fuelLevel">fuelLevel</label>
+            <input
+              type="number"
+              className="form-control"
+              value={this.props.userInfo.fuelLevel}
+              onChange={this.handleChange}
+              name="fuelLevel"
             />
           </div>
 

@@ -26,10 +26,9 @@ handleDelete(robotId){
 
 
   render() {
-    console.log('projects', this.props.projects);
     return (
       <div className="container">
-        <ProjectInputForm />
+        < ProjectInputForm />
         {this.props.projects.map((project) => (
           <div key={project.id}  className="card"  >
             <div  className="card ">
