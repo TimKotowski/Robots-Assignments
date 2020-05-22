@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchNewRobot, updateRobotForm } from '../redux/robots';
+import { fetchNewRobot, updateRobotInput } from '../redux/robots';
 
 export class RobotInputForm extends Component {
   constructor() {
@@ -11,7 +11,7 @@ export class RobotInputForm extends Component {
   }
 
   handleChange(e) {
-    this.props.updateRobot(e);
+    this.props.updateRobotInput(e);
     e.persist();
   }
 
@@ -85,7 +85,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  updateRobot: (e) => dispatch(updateRobotForm(e)),
+  updateRobotInput: (e) => dispatch(updateRobotInput(e)),
   createRobot: (robot) => dispatch(fetchNewRobot(robot)),
 });
 

@@ -13,7 +13,7 @@ const initialState = {
 
 const GET_ALL_PROJECTS = 'GET_ALL_PROJECTS';
 const CREATE_PROJECT_INFO = 'CREATE_PROJECT_FORM';
-const UPDATE_PROJECT_FORM = 'UPDATE_PROJECT_FORM ';
+const UPDATE_PROJECT_INPUT = 'UPDATE_PROJECT_INPUT ';
 const DELETE_PROJECT_FORM = 'DELETE_PROJECT_FORM';
 const SET_UPDATED_FORM = 'SET_UPDATED_FORM';
 
@@ -22,8 +22,8 @@ export const getAllProjects = (projects) => ({
   projects,
 });
 
-export const updateProjectForm = (e) => ({
-  type: UPDATE_PROJECT_FORM,
+export const updateProjectInput = (e) => ({
+  type: UPDATE_PROJECT_INPUT,
   e,
 });
 
@@ -84,7 +84,7 @@ const projectsReducer = (state = initialState, action) => {
   switch (action.type){
     case GET_ALL_PROJECTS:
     return {...state, projects: action.projects}
-    case UPDATE_PROJECT_FORM:
+    case UPDATE_PROJECT_INPUT:
       return {...state, userInfo: {...state.userInfo, [action.e.target.name]: action.e.target.value  }}
       case CREATE_PROJECT_INFO:
         return {...state, projects: [...state.projects, action.userInfo]}

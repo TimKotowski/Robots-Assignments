@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCreatedProject, updateProjectForm } from '../redux/projects';
+import { fetchCreatedProject, updateProjectInput } from '../redux/projects';
 
 export class ProjectInputForm extends Component {
   constructor() {
@@ -10,7 +10,7 @@ export class ProjectInputForm extends Component {
   }
 
   handleChange(e) {
-    this.props.updateProject(e);
+    this.props.updateProjectInput(e);
     e.persist();
   }
 
@@ -92,7 +92,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  updateProject: (e) => dispatch(updateProjectForm(e)),
+  updateProjectInput: (e) => dispatch(updateProjectInput(e)),
   createdProject: (info) => dispatch(fetchCreatedProject(info)),
 });
 

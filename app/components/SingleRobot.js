@@ -10,7 +10,7 @@ export class SingleRobots extends Component {
     isLoading: true,
 
   }
-  this.handleUnassign = this.handleUnassign.bind(this)
+  // this.handleUnassign = this.handleUnassign.bind(this)
 }
   async componentDidMount() {
   const robotId = this.props.match.params.robotId;
@@ -20,9 +20,9 @@ export class SingleRobots extends Component {
     })
   }
 
-  handleUnassign(id){
-    this.props.deleteProject(id)
-  }
+  // handleUnassign(id){
+  //   this.props.deleteProject(id)
+  // }
 
   render() {
     const { robot } = this.props;
@@ -48,7 +48,7 @@ export class SingleRobots extends Component {
             <h4 className="card-text" style={{ color: '#0d0d0d' }}>
            Project Priority: {robot.projects[0].priority}
             </h4>
-          <button onClick={() => {this.handleUnassign(robot.projects[0].id)}} type="button" className="btn btn-warning">Unassign</button>
+          {/* <button onClick={() => {this.handleUnassign(robot.projects[0].id)}} type="button" className="btn btn-warning">Unassign</button> */}
           </div>
            }
 
@@ -92,7 +92,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   loadRobotInfo: (robot) => dispatch(fetchSingleRobot(robot)),
-  deleteProject: (id) => dispatch(fetchDeletedRobot(id)),
+  // deleteProject: (id) => dispatch(fetchDeletedRobot(id)),
 });
 
 export default connect(mapState, mapDispatch)(SingleRobots);

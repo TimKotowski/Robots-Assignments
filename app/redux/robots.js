@@ -12,8 +12,8 @@ const initialState = {
 };
 
 const GET_ALL_ROBOTS = 'GET_ALL_ROBOTS';
+const UPDATE_ROBOT_INPUTS = 'UPDATE_ROBOT_INPUTS';
 const CREATE_ROBOT_INFO = 'CREATE_ROBOT_INFO';
-const UPDATE_ROBOT_FORM = 'UPDATE_ROBOT_FORM';
 const DELETE_ROBOT = 'DELETE_ROBOT'
 const UPDATE_FORM = 'UPDATE_FORM'
 
@@ -22,8 +22,8 @@ export const getAllRobots = robots => ({
   robots
 });
 
-export const updateRobotForm = info => ({
-  type: UPDATE_ROBOT_FORM,
+export const updateRobotInput = info => ({
+  type: UPDATE_ROBOT_INPUTS,
   info,
 });
 
@@ -93,7 +93,7 @@ const robotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_ROBOTS:
       return { ...state, robots: action.robots };
-    case UPDATE_ROBOT_FORM:
+    case UPDATE_ROBOT_INPUTS:
       return { ...state, user: {...state.user, [action.info.target.name]: action.info.target.value}};
     case CREATE_ROBOT_INFO:
       return { ...state, robots: [...state.robots, action.robotInfo] };
