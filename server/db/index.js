@@ -8,17 +8,15 @@ const Robot = require('./robot')
 // This is a great place to establish associations between your models
 // (https://sequelize-guides.netlify.com/association-types/).
 // Example:
-// getRobot
-// Project.hasMany(Robot)
-// Robot.belongsTo(Project)
+
 Robot.belongsToMany(Project, {through: 'projects_robots_like'})
 Project.belongsToMany(Robot, {through: 'projects_robots_like'})
 
-// Project.belongsTo(Robot)
-// Robot.hasMany(Project)
+
 module.exports = {
   // Include your models in this exports object as well!
   db,
   Project,
   Robot,
 }
+

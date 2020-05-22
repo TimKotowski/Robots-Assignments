@@ -30,51 +30,18 @@ router.get('/:robotId', async (req, res, next) => {
 // api/robots
 router.post('/', async (req, res, next) => {
   try {
-    //  const { name, fuelType, fuelLevel, imageUrl } = req.body;
-  // // console.log('started handler')
-  // console.log(JSON.stringify(req.body));
-  // const robot = await Robot.create({
-  //   name,
-  //   imageUrl,
-  //   fuelType,
-  //   fuelLevel,
-  // });
+     const { name, fuelType, fuelLevel, imageUrl } = req.body;
+  // console.log('started handler')
+  console.log(JSON.stringify(req.body));
+  const robot = await Robot.create({
+    name,
+    imageUrl,
+    fuelType,
+    fuelLevel,
+  });
 
-  // res.json(robot);
+  res.json(robot);
 
-  console.log(JSON.stringify(req.body))
-    const {name, fuelType, fuelLevel, imageUrl} = req.body
-    const robot = await Robot.findOrCreate({
-      where: {
-        name,
-        fuelLevel,
-        imageUrl,
-        fuelType
-      }
-    })
-
-    const currentRobot = await Robot.findByPk(req.body.projectId);
-    await currentRobot.setRobots(robot[0]);
-    res.json(robot[0]);
-
-    // if (!fuelType){
-    //   res.send({fuelType: 'electric'})
-    // }
-    // const {title, deadline, priority, completed, description} = req.body
-    // const [project, created] = await Project.findOrCreate({
-    //   where: {
-    //     title,
-    //     deadline,
-    //     priority,
-    //     completed,
-    //     description
-    //   }
-    // })
-
-    // await robot.addProjects(project)
-
-
-    // res.json(robot)
 
   } catch (error) {
     console.log('post', error);
@@ -115,66 +82,30 @@ router.delete('/:robotId', async (req, res, next) => {
   }
 });
 
+
+
+// router.delete('/:robotId/projects/:projectId', async (req, res, next) => {
+//   try {
+
+
+//     const robotId = req.params.robotId
+//     const projectId = req.params.projectid
+//       const robot = await Robot.findByPk(robotId)
+//       await robot.removeProject(projectId)
+//       console.log("all done")
+
+
+
+
+//     res.send(robot);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+
+// const __robot = await Robot.findByPk(1)
+    // await __robot.removeProject(1)
+    // console.log("all done")
 module.exports = router;
 
-
-//   const {title, deadline, completed, decription} = req.body
-
-//  const createProject = await Project.create({
-  //    title,
-  //    deadline,
-  //    completed,
-  //    decription
-
-  //  })
-
-  //  await createRobot.setProject(createProject)
-
-
-  // estalbish a ocnenciton between two models
-  // useing setLocation
-
-  // TODO: KEEP THIS REVIEW LATER
-  // const {name, fuelType, fuelLevel, imageUrl} = req.body
-  // // console.log('started handler')
-  // console.log(JSON.stringify(req.body))
-  // const [robot, createdAt] = await Robot.findOrCreate({
-  //   where: {
-  //     name,
-  //     imageUrl,
-  //     fuelType,
-  //     fuelLevel
-
-  //   }
-  // })
-
-  // const {title, deadline, priority, completed, description} = req.body
-  // const [project, created] = await Project.findOrCreate({
-  //   where: {
-  //     title,
-  //     deadline,
-  //     priority,
-  //     completed,
-  //     description
-
-  //   }
-  // })
-
-  // await robot.setProjects(project)
-
-  // res.json(robot)
-
-
-  // // robot is being assigned a project
-
-  // const { name, fuelType, fuelLevel, imageUrl } = req.body;
-  // // console.log('started handler')
-  // console.log(JSON.stringify(req.body));
-  // const robot = await Robot.create({
-  //   name,
-  //   imageUrl,
-  //   fuelType,
-  //   fuelLevel,
-  // });
-
-  // res.json(robot);

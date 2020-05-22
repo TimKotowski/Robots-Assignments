@@ -10,8 +10,8 @@ export class AllRobots extends Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  componentDidMount() {
-    this.props.loadRobots();
+  async componentDidMount() {
+    await this.props.loadRobots();
   }
 
   handleDelete(robotId) {
@@ -19,6 +19,7 @@ export class AllRobots extends Component {
   }
 
   render() {
+
     return (
       <div className="container">
         <RobotInputForm />

@@ -36,7 +36,7 @@ describe('Tier One: Project >-< Robot Association', () => {
     });
   });
 
-  describe('Seed File', () => {
+  describe.only('Seed File', () => {
     let robots, projects;
     beforeEach(async () => {
       await seed();
@@ -44,14 +44,14 @@ describe('Tier One: Project >-< Robot Association', () => {
       projects = await Project.findAll({ include: [Robot] });
     });
 
-    xit('creates at least one robot that has no projects', () => {
+    it('creates at least one robot that has no projects', () => {
       const robotsWithNoProjects = robots
         .filter((robot) => !robot.projects.length)
         .map((robot) => robot.name);
       expect(robotsWithNoProjects).to.have.lengthOf.above(0);
     });
 
-    xit('creates at least one project that has no robots', () => {
+    it('creates at least one project that has no robots', () => {
       const projectsWithNoRobots = projects
         .filter((project) => !project.robots.length)
         .map((project) => project.title);

@@ -4,17 +4,39 @@ import { fetchSingleProject } from '../redux/singleProject';
 import EditProjectForm from './EditProjectForm'
 
 export class SingleProject extends Component {
-  componentDidMount() {
+  constructor(){
+    super()
+    this.state = {
+      isLoading: true
+    }
+  }
+
+  async componentDidMount() {
     const projectId = this.props.match.params.projectId;
-    this.props.loadProjectInfo(projectId);
+   await this.props.loadProjectInfo(projectId);
+   this.setState({
+     isLoading: false
+   })
   }
 
   render() {
     const { project } = this.props;
-
+    const {isLoading} = this.state
     return (
       <div className="container">
         <EditProjectForm />
+        {!isLoading &&
+        <div className="card">
+          <div
+            className="card-body"
+            style={{ backgroundColor: 'grey' }}>
+            <h3 style={{ color: '#0d0d0d' }}>Name: {project.robots[0].name}</h3>
+            <h3 style={{ color: '#0d0d0d' }}>fuelLevel: {project.robots[0].fuelLevel}</h3>
+            <h3 style={{ color: '#0d0d0d' }}>fuelType: {project.robots[0].fuelType}</h3>
+            <button   type="button" className="btn btn-warning">Unassign</button>
+          </div>
+        </div>
+        }
         <div className="card">
           <div
             key={project.id}
@@ -27,6 +49,7 @@ export class SingleProject extends Component {
             <h3 style={{ color: '#0d0d0d' }}>Priority: {project.priority}</h3>
             <h3 style={{ color: '#0d0d0d' }}>Deadline: {project.deadline}</h3>
             <h3 style={{ color: '#0d0d0d' }}>Completed: {project.completed}</h3>
+            <button   type="button" className="btn btn-success">Completed</button>
           </div>
         </div>
       </div>

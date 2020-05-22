@@ -13,8 +13,8 @@ export class AllProjects extends React.Component {
   }
 
 
-  componentDidMount() {
-    this.props.loadProjects();
+  async componentDidMount() {
+   await  this.props.loadProjects();
 
   }
 

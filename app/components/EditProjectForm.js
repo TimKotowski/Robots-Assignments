@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchUpdatedForm, setUpdatedForm } from '../redux/projects';
+import {fetchUpdatedForm } from '../redux/projects';
 
 export class EditProjectForm extends Component {
   constructor(props) {
