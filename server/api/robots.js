@@ -82,30 +82,29 @@ router.delete('/:robotId', async (req, res, next) => {
   }
 });
 
+router.put('/:robotId/projects/:projectId', async (req, res, next) => {
+  try {
+    const projectId = Number(req.params.projectId)
+    const robotId = Number(req.params.robotId)
+    console.log(JSON.stringify(projectId))
+    const [robotCount, affectedRobot] = await Robot.update(req.body, {
+      where: {
+        id: req.params.robotId,
+      },
+      returning: true,
+      plaing: true,
+    });
+    const robot = await Robot.findByPk(robotId)
+    await robot.removeProject(projectId)
+    res.json(affectedRobot);
+  } catch (error) {
+    next(error);
+  }
+});
 
 
-// router.delete('/:robotId/projects/:projectId', async (req, res, next) => {
-//   try {
+// route that unassigns
+// update route, when i click the assign button it updates and gets rid of the project from the robots both back and front
 
-
-//     const robotId = req.params.robotId
-//     const projectId = req.params.projectid
-//       const robot = await Robot.findByPk(robotId)
-//       await robot.removeProject(projectId)
-//       console.log("all done")
-
-
-
-
-//     res.send(robot);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-
-// const __robot = await Robot.findByPk(1)
-    // await __robot.removeProject(1)
-    // console.log("all done")
 module.exports = router;
 

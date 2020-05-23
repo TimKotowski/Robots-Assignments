@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSingleRobot, fetchDeletedRobot} from '../redux/singleRobot';
+import { fetchSingleRobot, fetchRobotUnassignAssocation} from '../redux/singleRobot';
 import EditRobotForm from './EditRobotForm';
 
 export class SingleRobots extends Component {
@@ -8,9 +8,8 @@ export class SingleRobots extends Component {
     super()
     this.state = {
     isLoading: true,
-
   }
-  // this.handleUnassign = this.handleUnassign.bind(this)
+  this.handleUnassign = this.handleUnassign.bind(this)
 }
   async componentDidMount() {
   const robotId = this.props.match.params.robotId;
@@ -20,9 +19,10 @@ export class SingleRobots extends Component {
     })
   }
 
-  // handleUnassign(id){
-  //   this.props.deleteProject(id)
-  // }
+  handleUnassign(projectId){
+    const robotId = this.props.robot.id
+    this.props.unassignRobotsProject(projectId, robotId)
+  }
 
   render() {
     const { robot } = this.props;
@@ -33,10 +33,10 @@ export class SingleRobots extends Component {
         <div className="card" style={{ width: '18rem' }}>
           {!isLoading &&
           <div
-            key={robot.id}
-            className="card-body"
-            style={{ backgroundColor: '#8c8c8c' }}>
-             <h5 className="card-title" style={{ color: '#0d0d0d' }}>
+          key={robot.id}
+          className="card-body"
+          style={{ backgroundColor: '#8c8c8c' }}>
+            <h5 className="card-title" style={{ color: '#0d0d0d' }}>
              Title:  {robot.projects[0].title}
             </h5>
             <h5 className="card-title" style={{ color: '#0d0d0d' }}>
@@ -48,15 +48,10 @@ export class SingleRobots extends Component {
             <h4 className="card-text" style={{ color: '#0d0d0d' }}>
            Project Priority: {robot.projects[0].priority}
             </h4>
-          {/* <button onClick={() => {this.handleUnassign(robot.projects[0].id)}} type="button" className="btn btn-warning">Unassign</button> */}
+          <button onClick={() => {this.handleUnassign(robot.projects[0].id)}} type="button" className="btn btn-warning">Unassign</button>
           </div>
            }
-
         </div>
-
-
-
-
         <div className="card" style={{ width: '18rem' }}>
           <div
             key={robot.id}
@@ -92,7 +87,10 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   loadRobotInfo: (robot) => dispatch(fetchSingleRobot(robot)),
-  // deleteProject: (id) => dispatch(fetchDeletedRobot(id)),
+  unassignRobotsProject: (projectId, robotId) => dispatch(fetchRobotUnassignAssocation(projectId, robotId)),
 });
 
 export default connect(mapState, mapDispatch)(SingleRobots);
+
+// route that unassigns
+// update route, when i click the assign button it updates and gets rid of the project from the robots both back and front

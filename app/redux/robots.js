@@ -56,11 +56,8 @@ export const fetchAllRobots = () => async (dispatch) => {
 
 export const fetchNewRobot = robotInfo => async (dispatch) => {
   try {
-    console.log('s', robotInfo)
     const { data: newRobot } = await axios.post('/api/robots', robotInfo);
-    console.log('fetched the data')
     dispatch(createRobotInfo(newRobot));
-    console.log('data passing into the action creator')
   } catch (error) {
     console.log('error in fetchrobots post', error);
   }
@@ -69,7 +66,6 @@ export const fetchNewRobot = robotInfo => async (dispatch) => {
 
 export const fetchDeletedRobot = robotId => async(dispatch) => {
   try {
-    // dont need a const with data in here becaseu the axios is lareadying deleting it so just dispatch it
      await axios.delete(`/api/robots/${robotId}`)
     dispatch(deleteRobotUser(robotId))
   } catch (error) {
@@ -79,11 +75,8 @@ export const fetchDeletedRobot = robotId => async(dispatch) => {
 
 export const fetchUpdatedRobot = (robot, robotId) => async(dispatch) => {
   try {
-    console.log('s')
     const {data: updatedRobot} = await axios.put(`/api/robots/${robotId}`, robot)
-    console.log('hitit')
     dispatch(updateRobotInfo(updatedRobot))
-    console.log('hitit')
   } catch (error) {
     console.log('error in fetch updated thunk creator', error)
   }
@@ -115,12 +108,5 @@ const robotsReducer = (state = initialState, action) => {
   }
 };
 
-
-// You have a form, when the page loads and you load an existing robot, you want to
-// prefill out this form with the existing robot data.
-// User will then make modifications to the form
-// User then clicks submit, and you want to take the form data, along with the ID
-// of the robot that's being updated, and submit that to my reducer
-// that redcuer updating the info for the robot with the given ID
 
 export default robotsReducer;

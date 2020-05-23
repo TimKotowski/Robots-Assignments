@@ -81,6 +81,29 @@ router.delete('/:projectId', async (req, res, next) => {
   }
 });
 
+
+router.put('/:projectId/robots/:robotId', async (req, res, next) => {
+  try {
+      const robotId = req.params.robotId
+      const projectId = req.params.projectId
+      const [projectCount, affectedProject] = await Project.update(req.body, {
+        where: {
+          id: req.params.robotId
+        },
+        returning: true,
+        plain: true
+      })
+      const project = await Project.findByPk(projectId)
+      await project.removeRobot(robotId)
+      res.json(affectedProject)
+
+  } catch (error) {
+    next(error)
+  }
+
+
+})
+
 module.exports = router;
 
 

@@ -5,7 +5,6 @@ import {fetchUpdatedRobot, updateRobotForm } from '../redux/robots';
 export class EditRobotForm extends Component {
   constructor(props) {
     super(props);
-    console.log('props', props)
     this.state = {
       name: this.props.robotInfo.name,
       fuelLevel: this.props.robotInfo.fuelLevel,
@@ -14,7 +13,7 @@ export class EditRobotForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-// do some changing
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -26,13 +25,13 @@ export class EditRobotForm extends Component {
     e.preventDefault();
     const id = this.props.robotInfo.id
     const { name, fuelLevel } = this.state;
+
     this.props.createRobot({name, fuelLevel}, id);
   }
 
 
   render() {
    const {name, fuelLevel} = this.state
-    console.log(this.props.robotInfo)
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSingleProject } from '../redux/singleProject';
+import { fetchSingleProject, fetchProjectUnassignAssocation } from '../redux/singleProject';
 import EditProjectForm from './EditProjectForm'
 
 export class SingleProject extends Component {
@@ -9,6 +9,7 @@ export class SingleProject extends Component {
     this.state = {
       isLoading: true
     }
+    this.handleUnassign = this.handleUnassign.bind(this)
   }
 
   async componentDidMount() {
@@ -17,6 +18,11 @@ export class SingleProject extends Component {
    this.setState({
      isLoading: false
    })
+  }
+
+  handleUnassign(robotId){
+  const id = this.props.project.id
+  this.props.unassignProejctsRobot(robotId, id)
   }
 
   render() {
@@ -33,7 +39,7 @@ export class SingleProject extends Component {
             <h3 style={{ color: '#0d0d0d' }}>Name: {project.robots[0].name}</h3>
             <h3 style={{ color: '#0d0d0d' }}>fuelLevel: {project.robots[0].fuelLevel}</h3>
             <h3 style={{ color: '#0d0d0d' }}>fuelType: {project.robots[0].fuelType}</h3>
-            <button   type="button" className="btn btn-warning">Unassign</button>
+            <button onClick={() => this.handleUnassign(project.robots[0].id)}   type="button" className="btn btn-warning">Unassign</button>
           </div>
         </div>
         }
@@ -49,7 +55,7 @@ export class SingleProject extends Component {
             <h3 style={{ color: '#0d0d0d' }}>Priority: {project.priority}</h3>
             <h3 style={{ color: '#0d0d0d' }}>Deadline: {project.deadline}</h3>
             <h3 style={{ color: '#0d0d0d' }}>Completed: {project.completed}</h3>
-            <button   type="button" className="btn btn-success">Completed</button>
+            <button    type="button" className="btn btn-success">Completed</button>
           </div>
         </div>
       </div>
@@ -63,6 +69,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   loadProjectInfo: (project) => dispatch(fetchSingleProject(project)),
+  unassignProejctsRobot: (robotId, projectId) => dispatch(fetchProjectUnassignAssocation(robotId, projectId))
 });
 
 export default connect(mapState, mapDispatch)(SingleProject);

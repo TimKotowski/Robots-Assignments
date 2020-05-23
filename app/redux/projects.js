@@ -22,9 +22,9 @@ export const getAllProjects = (projects) => ({
   projects,
 });
 
-export const updateProjectInput = (e) => ({
+export const updateProjectInput = (info) => ({
   type: UPDATE_PROJECT_INPUT,
-  e,
+  info,
 });
 
 export const createdProjectInfo = (userInfo) => ({
@@ -37,9 +37,10 @@ export const deleteProjectForm = (projectId) => ({
   projectId,
 });
 
-export const setUpdatedForm = (project) => ({
+export const setUpdatedForm = project => ({
   type: SET_UPDATED_FORM,
   project,
+
 });
 
 export const fetchAllProjects = () => async (dispatch) => {
@@ -61,7 +62,6 @@ export const fetchCreatedProject = (projectInfo) => async (dispatch) => {
 
 export const fetchDeletedProject = (projectId) => async (dispatch) => {
   try {
-    // dont need a const with data in here becaseu the axios is lareadying deleting it so just dispatch it
     await axios.delete(`/api/projects/${projectId}`, projectId);
     dispatch(deleteProjectForm(projectId));
   } catch (error) {
@@ -70,7 +70,6 @@ export const fetchDeletedProject = (projectId) => async (dispatch) => {
 };
 export const fetchUpdatedForm = (project, projectId) => async (dispatch) => {
   try {
-    // dont need a const with data in here becaseu the axios is lareadying deleting it so just dispatch it
     const {data: updatedProject } = await axios.put(`/api/projects/${projectId}`, project);
     dispatch(setUpdatedForm(updatedProject));
   } catch (error) {
@@ -85,7 +84,7 @@ const projectsReducer = (state = initialState, action) => {
     case GET_ALL_PROJECTS:
     return {...state, projects: action.projects}
     case UPDATE_PROJECT_INPUT:
-      return {...state, userInfo: {...state.userInfo, [action.e.target.name]: action.e.target.value  }}
+      return {...state, userInfo: {...state.userInfo, [action.info.target.name]: action.info.target.value  }}
       case CREATE_PROJECT_INFO:
         return {...state, projects: [...state.projects, action.userInfo]}
         case DELETE_PROJECT_FORM:

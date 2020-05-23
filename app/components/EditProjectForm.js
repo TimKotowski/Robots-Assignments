@@ -30,7 +30,7 @@ export class EditProjectForm extends Component {
   }
 
   render() {
-    console.log(this.props.projectInfo)
+    console.log('porps', this.props)
     const {description, deadline, title, completed, priority} = this.state
     return (
       <div className="container">
@@ -103,7 +103,6 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  // updateProject: (info) => dispatch(setUpdatedForm(info)),
   createProject: (project, id) => dispatch(fetchUpdatedForm(project, id)),
 });
 

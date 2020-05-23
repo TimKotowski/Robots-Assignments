@@ -85,7 +85,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  updateRobotInput: (e) => dispatch(updateRobotInput(e)),
+  updateRobotInput: (input) => dispatch(updateRobotInput(input)),
   createRobot: (robot) => dispatch(fetchNewRobot(robot)),
 });
 

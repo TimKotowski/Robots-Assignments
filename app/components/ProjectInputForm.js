@@ -92,7 +92,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  updateProjectInput: (e) => dispatch(updateProjectInput(e)),
+  updateProjectInput: (info) => dispatch(updateProjectInput(info)),
   createdProject: (info) => dispatch(fetchCreatedProject(info)),
 });
 
