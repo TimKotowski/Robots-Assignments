@@ -5,6 +5,7 @@ import {fetchUpdatedForm } from '../redux/projects';
 export class EditProjectForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
     title: this.props.projectInfo.title,
     deadline: this.props.projectInfo.deadline,
@@ -27,6 +28,7 @@ export class EditProjectForm extends Component {
     const id = this.props.projectInfo.id
     const {title, deadline, description, completed, priority} = this.state;
     this.props.createProject({ title, deadline, description, completed, priority}, id);
+    window.location.reload()
   }
 
   render() {

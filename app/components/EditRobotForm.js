@@ -25,8 +25,8 @@ export class EditRobotForm extends Component {
     e.preventDefault();
     const id = this.props.robotInfo.id
     const { name, fuelLevel } = this.state;
-
     this.props.createRobot({name, fuelLevel}, id);
+    window.location.reload()
   }
 
 

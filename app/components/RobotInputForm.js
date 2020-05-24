@@ -17,11 +17,11 @@ export class RobotInputForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { name, imageUrl, fuelLevel} = this.props.userInfo;
+    const { name, imageUrl, fuelLevel } = this.props.userInfo;
     this.props.createRobot({
       name,
       imageUrl,
-      fuelLevel
+      fuelLevel,
     });
   }
 
@@ -71,7 +71,15 @@ export class RobotInputForm extends Component {
             <option  name="fuelType"  value={this.props.userInfo.fuelType}>Electric</option>
       </select>
           </div> */}
-          <button type="submit"  disabled={!this.props.userInfo.fuelLevel || !this.props.userInfo.imageUrl || !this.props.userInfo.name }  className="btn btn-primary">
+          <button
+            type="submit"
+            disabled={
+              !this.props.userInfo.fuelLevel ||
+              !this.props.userInfo.imageUrl ||
+              !this.props.userInfo.name
+            }
+            className="btn btn-primary"
+          >
             Submit
           </button>
         </form>

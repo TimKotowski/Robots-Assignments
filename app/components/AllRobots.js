@@ -26,7 +26,7 @@ export class AllRobots extends Component {
         {this.props.robots.map((robot) => (
           <div key={robot.id} className="card" style={{ width: '18rem' }}>
             <NavLink to={`/robots/${robot.id}`}>
-              <img className="card-img-top   " src={`${robot.imageUrl}`} />
+              <img className="card-img-top" src={`${robot.imageUrl}`} />
             </NavLink>
             <div
               className="card-body"

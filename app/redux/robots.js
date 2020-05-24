@@ -1,5 +1,3 @@
-// Take a look at app/redux/index.js to see where this reducer is
-// added to the Redux store with combineReducers
 import axios from 'axios';
 
 const initialState = {
@@ -7,43 +5,40 @@ const initialState = {
   user: {
     name: '',
     fuelLevel: '',
-    imageUrl: ''
+    imageUrl: '',
   },
 };
 
 const GET_ALL_ROBOTS = 'GET_ALL_ROBOTS';
 const UPDATE_ROBOT_INPUTS = 'UPDATE_ROBOT_INPUTS';
 const CREATE_ROBOT_INFO = 'CREATE_ROBOT_INFO';
-const DELETE_ROBOT = 'DELETE_ROBOT'
-const UPDATE_FORM = 'UPDATE_FORM'
+const DELETE_ROBOT = 'DELETE_ROBOT';
+const UPDATE_FORM = 'UPDATE_FORM';
 
-export const getAllRobots = robots => ({
+export const getAllRobots = (robots) => ({
   type: GET_ALL_ROBOTS,
-  robots
+  robots,
 });
 
-export const updateRobotInput = info => ({
+export const updateRobotInput = (info) => ({
   type: UPDATE_ROBOT_INPUTS,
   info,
 });
 
-
-export const createRobotInfo = robotInfo => ({
+export const createRobotInfo = (robotInfo) => ({
   type: CREATE_ROBOT_INFO,
   robotInfo,
 });
 
-export const deleteRobotUser = id => ({
+export const deleteRobotUser = (id) => ({
   type: DELETE_ROBOT,
-  id
-})
+  id,
+});
 
-
-export const updateRobotInfo = robot => ({
+export const updateRobotInfo = (robot) => ({
   type: UPDATE_FORM,
-  robot
-})
-
+  robot,
+});
 
 export const fetchAllRobots = () => async (dispatch) => {
   try {
@@ -54,7 +49,7 @@ export const fetchAllRobots = () => async (dispatch) => {
   }
 };
 
-export const fetchNewRobot = robotInfo => async (dispatch) => {
+export const fetchNewRobot = (robotInfo) => async (dispatch) => {
   try {
     const { data: newRobot } = await axios.post('/api/robots', robotInfo);
     dispatch(createRobotInfo(newRobot));
@@ -63,31 +58,36 @@ export const fetchNewRobot = robotInfo => async (dispatch) => {
   }
 };
 
-
-export const fetchDeletedRobot = robotId => async(dispatch) => {
+export const fetchDeletedRobot = (robotId) => async (dispatch) => {
   try {
-     await axios.delete(`/api/robots/${robotId}`)
-    dispatch(deleteRobotUser(robotId))
+    await axios.delete(`/api/robots/${robotId}`);
+    dispatch(deleteRobotUser(robotId));
   } catch (error) {
-    console.log('error in fetchDelete thunk creator', error)
+    console.log('error in fetchDelete thunk creator', error);
   }
-}
+};
 
-export const fetchUpdatedRobot = (robot, robotId) => async(dispatch) => {
+export const fetchUpdatedRobot = (robot, robotId) => async (dispatch) => {
   try {
-    const {data: updatedRobot} = await axios.put(`/api/robots/${robotId}`, robot)
-    dispatch(updateRobotInfo(updatedRobot))
+    const { data: updatedRobot } = await axios.put(`/api/robots/${robotId}`, robot);
+    dispatch(updateRobotInfo(updatedRobot));
   } catch (error) {
-    console.log('error in fetch updated thunk creator', error)
+    console.log('error in fetch updated thunk creator', error);
   }
-}
+};
 
 const robotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_ROBOTS:
       return { ...state, robots: action.robots };
     case UPDATE_ROBOT_INPUTS:
-      return { ...state, user: {...state.user, [action.info.target.name]: action.info.target.value}};
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [action.info.target.name]: action.info.target.value,
+        },
+      };
     case CREATE_ROBOT_INFO:
       return { ...state, robots: [...state.robots, action.robotInfo] };
     case DELETE_ROBOT:
@@ -107,6 +107,5 @@ const robotsReducer = (state = initialState, action) => {
       return state;
   }
 };
-
 
 export default robotsReducer;

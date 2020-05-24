@@ -30,8 +30,6 @@ router.get('/:projectId', async (req, res, next) => {
 // api/projects
 router.post('/', async (req, res, next) => {
   try {
-
-
 const { title, deadline, priority, description, completed } = req.body;
     const createProject = await Project.create({
       title,
@@ -84,25 +82,30 @@ router.delete('/:projectId', async (req, res, next) => {
 
 router.put('/:projectId/robots/:robotId', async (req, res, next) => {
   try {
-      const robotId = req.params.robotId
-      const projectId = req.params.projectId
-      const [projectCount, affectedProject] = await Project.update(req.body, {
-        where: {
-          id: req.params.robotId
-        },
-        returning: true,
-        plain: true
-      })
+      const robotId = Number(req.params.robotId)
+      const projectId = Number(req.params.projectId)
+
       const project = await Project.findByPk(projectId)
       await project.removeRobot(robotId)
-      res.json(affectedProject)
-
   } catch (error) {
     next(error)
   }
 
 
 })
+
+// router.post('/:projectId', async (req, res, next) => {
+//   try {
+//       const {completed} = req.body
+
+
+
+//   } catch (error) {
+//     next(error)
+//   }
+
+
+// })
 
 module.exports = router;
 

@@ -49,15 +49,13 @@ Congrats! You have completed your first vertical slice! Make sure to `commit -m 
 
 - Write a component to display a single robot with the following information:
   - [X] The robot's name, image, fuelType, fuelLevel
-  // TODO: check back
-  - [] The names of all their assigned projects (or a helpful message if they don't have any)
+  - [X] The names of all their assigned projects (or a helpful message if they don't have any)
 - [X] Display the appropriate robot when the url matches `/robots/:robotId`
 - [X] Clicking on a robot from the all-robots view should navigate to show that robot in the single-robot view
 
 - Write a component to display a single project with the following information:
   - [X] The project's title, deadline, priority, description
-  // TODO: get back later
-  - [ ] A list of the names of all robots in that project (or a helpful message if it doesn't have any robots)
+  - [X] A list of the names of all robots in that project (or a helpful message if it doesn't have any robots)
 - [X] Display the appropriate project's info when the url matches `/projects/:projectId`
 - [X] Clicking on a project from the all-projects view should navigate to show that project in the single-project view
 
@@ -137,15 +135,15 @@ Congrats! You have completed your fourth vertical slice! Make sure to `commit -m
 - [X] Display this component EITHER as part of the single-robot view, or as its own view
 - Submitting the form with valid data should:
   - [X] Make an AJAX request that causes that robot to be updated in the database
-  - [] Update the robot in the current view without needing to refresh the page
-- [ ] In the single-robot view, display an `Unassign` button next to each of its projects, which unassigns it from that project (in the database as well as this view)
+  - [X] Update the robot in the current view without needing to refresh the page
+- [X] In the single-robot view, display an `Unassign` button next to each of its projects, which unassigns it from that project (in the database as well as this view)
 
 - [X] Write a component to display a form updating _at least_ a project's title and completion status
 - [X] Display this component EITHER as part of the single-project view, or as its own view
 - Submitting the form with valid data should:
   - [X] Make an AJAX request that causes that project to be updated in the database
-  - [] Update the project in the current view without needing to refresh the page
-- [ ] In the single-project view, display an `Unassign` button next to each robot assigned to it, which unassigns that robot (in the database as well as this view)
+  - [X] Update the project in the current view without needing to refresh the page
+- [X] In the single-project view, display an `Unassign` button next to each robot assigned to it, which unassigns that robot (in the database as well as this view)
 - [ ] In the single-project view, display a `Complete` button, which marks the project as completed (in the database as well as this view)
 
 #### Backend

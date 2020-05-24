@@ -37,10 +37,9 @@ export const deleteProjectForm = (projectId) => ({
   projectId,
 });
 
-export const setUpdatedForm = project => ({
+export const setUpdatedForm = (project) => ({
   type: SET_UPDATED_FORM,
   project,
-
 });
 
 export const fetchAllProjects = () => async (dispatch) => {
@@ -56,7 +55,11 @@ export const fetchCreatedProject = (projectInfo) => async (dispatch) => {
   try {
     const { data: newProject } = await axios.post('/api/projects', projectInfo);
     dispatch(createdProjectInfo(newProject));
-  } catch (error) { console.log('you have an error in your Project Post route thunk creator', error);
+  } catch (error) {
+    console.log(
+      'you have an error in your Project Post route thunk creator',
+      error
+    );
   }
 };
 
@@ -65,40 +68,60 @@ export const fetchDeletedProject = (projectId) => async (dispatch) => {
     await axios.delete(`/api/projects/${projectId}`, projectId);
     dispatch(deleteProjectForm(projectId));
   } catch (error) {
-    console.log('you have an error in your project delete route thunk creator', error);
+    console.log(
+      'you have an error in your project delete route thunk creator',
+      error
+    );
   }
 };
 export const fetchUpdatedForm = (project, projectId) => async (dispatch) => {
   try {
-    const {data: updatedProject } = await axios.put(`/api/projects/${projectId}`, project);
+    const { data: updatedProject } = await axios.put(
+      `/api/projects/${projectId}`,
+      project
+    );
     dispatch(setUpdatedForm(updatedProject));
   } catch (error) {
-    console.log('you have an error in your project delete route thunk creator', error);
+    console.log(
+      'you have an error in your project delete route thunk creator',
+      error
+    );
   }
 };
 
 // Take a look at app/redux/index.js to see where this reducer is
 // added to the Redux store with combineReducers
 const projectsReducer = (state = initialState, action) => {
-  switch (action.type){
+  switch (action.type) {
     case GET_ALL_PROJECTS:
-    return {...state, projects: action.projects}
+      return { ...state, projects: action.projects };
     case UPDATE_PROJECT_INPUT:
-      return {...state, userInfo: {...state.userInfo, [action.info.target.name]: action.info.target.value  }}
-      case CREATE_PROJECT_INFO:
-        return {...state, projects: [...state.projects, action.userInfo]}
-        case DELETE_PROJECT_FORM:
-          return {...state, projects: state.projects.filter((project => project.id !== action.projectId))}
-          case SET_UPDATED_FORM:
-            return {
-              ...state,
-              projects: state.projects.map((project) => {
-                if (project.id === action.project.id) return action.project
-                return project
-              })
-            }
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          [action.info.target.name]: action.info.target.value,
+        },
+      };
+    case CREATE_PROJECT_INFO:
+      return { ...state, projects: [...state.projects, action.userInfo] };
+    case DELETE_PROJECT_FORM:
+      return {
+        ...state,
+        projects: state.projects.filter(
+          (project) => project.id !== action.projectId
+        ),
+      };
+    case SET_UPDATED_FORM:
+      return {
+        ...state,
+        projects: state.projects.map((project) => {
+          if (project.id === action.project.id) return action.project;
+          return project;
+        }),
+      };
     default:
-      return state
+      return state;
   }
 };
 
