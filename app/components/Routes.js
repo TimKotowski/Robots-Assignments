@@ -7,9 +7,7 @@ import Homepage from './Homepage';
 import AllProjects from './AllProjects';
 import SingleRobots from './SingleRobot';
 import SingleProject from './SingleProject';
-// import RobotInputForm from './RobotInputForm';
-// import ProjectInputForm from './ProjectInputForm';
-// import EditRobotForm from './EditRobotForm';
+
 
 const Routes = () => {
   return (

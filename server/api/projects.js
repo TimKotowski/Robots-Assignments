@@ -40,8 +40,6 @@ const { title, deadline, priority, description, completed } = req.body;
     });
 
     res.json(createProject);
-
-      res.json(project)
   } catch (error) {
     next(error);
   }
@@ -94,29 +92,21 @@ router.put('/:projectId/robots/:robotId', async (req, res, next) => {
 
 })
 
-// router.post('/:projectId', async (req, res, next) => {
-//   try {
-//       const {completed} = req.body
+router.post('/completed', async (req, res, next) => {
+  try {
+
+    const completedUpdate = await Project.findOne({where: {completed: 'false'}})
+    if (completedUpdate){
+      completedUpdate.update({
+        completed: 'true'
+      })
+    }
+   res.json(completedUpdate)
+  } catch (error) {
+    next(error)
+  }
 
 
-
-//   } catch (error) {
-//     next(error)
-//   }
-
-
-// })
+})
 
 module.exports = router;
-
-
-// const { title, deadline, priority, description, completed } = req.body;
-//     const createProject = await Project.create({
-//       title,
-//       deadline,
-//       priority,
-//       description,
-//       completed,
-//     });
-
-//     res.json(createProject);

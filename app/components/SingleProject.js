@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchSingleProject, fetchProjectUnassignAssocation} from '../redux/singleProject';
+import {fetchSingleProject, fetchProjectUnassignAssocation, fetchCompletedProjct} from '../redux/singleProject';
 import EditProjectForm from './EditProjectForm';
 
 export class SingleProject extends Component {
@@ -10,6 +10,7 @@ export class SingleProject extends Component {
       isLoaded: false,
     };
     this.handleUnassign = this.handleUnassign.bind(this);
+    this.handleComplete = this.handleComplete.bind(this);
   }
 
   async componentDidMount() {
@@ -26,9 +27,15 @@ export class SingleProject extends Component {
     window.location.reload()
   }
 
+  handleComplete(completed){
+    this.props.completeProject(completed)
+    window.location.reload()
+  }
+
   render() {
     const { project } = this.props;
     const { isLoaded } = this.state;
+
     return (
       <div className="container">
         <EditProjectForm />
@@ -52,7 +59,6 @@ export class SingleProject extends Component {
             </div>
           </div>
         ) : null}
-
         <div className="card">
           <div
             key={project.id}
@@ -64,8 +70,8 @@ export class SingleProject extends Component {
             <h3 style={{ color: '#0d0d0d' }}>Title: {project.title}</h3>
             <h3 style={{ color: '#0d0d0d' }}>Priority: {project.priority}</h3>
             <h3 style={{ color: '#0d0d0d' }}>Deadline: {project.deadline}</h3>
-            <h3 style={{ color: '#0d0d0d' }}>Completed: {project.completed}</h3>
-            <button    type="button" className="btn btn-success">
+            <h3 style={{ color: '#0d0d0d' }}>Completed: {project.completed ? 'true' : 'false' }</h3>
+            <button  onClick={() => this.handleComplete(project.completed ? 'true' : 'false' )} type="button" className="btn btn-success">
               Completed
             </button>
           </div>
@@ -84,8 +90,8 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   loadProjectInfo: (project) => dispatch(fetchSingleProject(project)),
-  unassignProejctsRobot: (robotId, projectId) =>
-    dispatch(fetchProjectUnassignAssocation(robotId, projectId)),
+  unassignProejctsRobot: (robotId, projectId) => dispatch(fetchProjectUnassignAssocation(robotId, projectId)),
+  completeProject: (completed) => dispatch(fetchCompletedProjct(completed))
 });
 
 export default connect(mapState, mapDispatch)(SingleProject);

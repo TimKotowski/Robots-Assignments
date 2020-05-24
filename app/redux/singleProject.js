@@ -6,6 +6,7 @@ const initialState = {
 
 const GET_PROJECT_INFO = 'GET_PROJECT_INFO';
 const UNASSIGN_PROJECT = 'UNASSIGN_PROJECT'
+const COMPLETED_PROJECT = 'COMPLETED_PROJECT'
 
 export const getProjectInfo = (project) => ({
   type: GET_PROJECT_INFO,
@@ -14,6 +15,11 @@ export const getProjectInfo = (project) => ({
 
 export const unassignProject = project => ({
   type: UNASSIGN_PROJECT,
+  project
+});
+
+export const completedProject = project => ({
+  type: COMPLETED_PROJECT,
   project
 });
 
@@ -35,6 +41,18 @@ export const fetchProjectUnassignAssocation = (robotId, projectId) => async (dis
   }
 }
 
+export const fetchCompletedProjct = (completed) => async(dispatch) => {
+  try {
+    console.log('htitng start')
+     const {data: updatedComplete} = axios.post(`/api/projects/completed`, completed)
+    console.log('htitng middle')
+    dispatch(completedProject(updatedComplete))
+    console.log('htitng end')
+  } catch (error) {
+    console.log('error in updatd complete fetch', error)
+  }
+}
+
 const singleProjectReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_PROJECT_INFO:
@@ -45,6 +63,14 @@ const singleProjectReducer = (state = initialState, action) => {
         singleProjectInfo: {
           ...state.singleProjectInfo,
           [action.project.prop]: action.project.value,
+        },
+      };
+    case COMPLETED_PROJECT:
+      return {
+        ...state,
+        singleProjectInfo: {
+          ...state.singleProjectInfo,
+          [action.project.prop]: action.project.value
         },
       };
     default:

@@ -17,17 +17,6 @@ const seed = async () => {
     await  robot.addProject(project)
     await  _robot.addProject(_project)
 
-    // const __robot = await Robot.findByPk(1)
-    // await __robot.removeProject(1)
-    // console.log("all done")
-
-    // const __project = await Project.findByPk(1)
-    // await __project.removeRobot(1)
-    // console.log("all done")
-
-    // const ___robot = await Robot.findByPk(2)
-    // await ___robot.removeProject(2)
-    // console.log("all done")
 
   } catch (err) {
     console.log(red(err));
