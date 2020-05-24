@@ -63,14 +63,6 @@ export class RobotInputForm extends Component {
               name="fuelLevel"
             />
           </div>
-          {/* <div className="form-group">
-          <label className="mr-sm-2" htmlFor="fuelType">Preference</label>
-             <select onChange={this.handleChange} className="custom-select mr-sm-2" id="inlineFormCustomSelect">
-            <option  name="fuelType"   value={this.props.userInfo.fuelType}>Gas</option>
-           <option  name="fuelType"   value={this.props.userInfo.fuelType}>Diesel</option>
-            <option  name="fuelType"  value={this.props.userInfo.fuelType}>Electric</option>
-      </select>
-          </div> */}
           <button
             type="submit"
             disabled={

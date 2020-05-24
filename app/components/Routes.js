@@ -19,7 +19,7 @@ const Routes = () => {
       <Route exact path="/" component={Homepage} />
       <Route>
         <div>
-          <h1>Page no found sorry!</h1>
+          <h1>Page not found sorry!</h1>
         </div>
       </Route>
     </Switch>

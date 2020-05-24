@@ -1,27 +1,23 @@
 const { green, red } = require('chalk');
 const { db, Project, Robot } = require('./server/db');
-const project_seed = require('./project_seed')
+const project_seed = require('./project_seed');
 const robot_seed = require('./robot_seed');
-const projects_robots_like = require('./projects_robots_like')
+const projects_robots_like = require('./projects_robots_like');
 
 const seed = async () => {
-
   try {
     await db.sync({ force: true });
-    await Project.bulkCreate(project_seed)
-    await Robot.bulkCreate(robot_seed)
-    const robot = await Robot.findByPk(1)
-    const project = await Project.findByPk(1)
-    const _robot = await Robot.findByPk(2)
-    const _project = await Project.findByPk(2)
-    await  robot.addProject(project)
-    await  _robot.addProject(_project)
-
+    await Project.bulkCreate(project_seed);
+    await Robot.bulkCreate(robot_seed);
+    const robot = await Robot.findByPk(1);
+    const project = await Project.findByPk(1);
+    const _robot = await Robot.findByPk(2);
+    const _project = await Project.findByPk(2);
+    await robot.addProject(project);
+    await _robot.addProject(_project);
   } catch (err) {
     console.log(red(err));
   }
-
-
 };
 
 

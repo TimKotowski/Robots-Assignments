@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { Robot, Project } = require('../db');
 
-//api/robots
 router.get('/', async (req, res, next) => {
   try {
     const allRobots = await Robot.findAll();
@@ -11,7 +10,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-//api/robots/:robotId
 router.get('/:robotId', async (req, res, next) => {
   try {
     const id = req.params.robotId;
@@ -27,32 +25,24 @@ router.get('/:robotId', async (req, res, next) => {
   }
 });
 
-// api/robots
 router.post('/', async (req, res, next) => {
   try {
-     const { name, fuelType, fuelLevel, imageUrl } = req.body;
-  // console.log('started handler')
-  console.log(JSON.stringify(req.body));
-  const robot = await Robot.create({
-    name,
-    imageUrl,
-    fuelType,
-    fuelLevel,
-  });
+    const { name, fuelType, fuelLevel, imageUrl } = req.body;
+    const robot = await Robot.create({
+      name,
+      imageUrl,
+      fuelType,
+      fuelLevel,
+    });
 
-  res.json(robot);
-
-
+    res.json(robot);
   } catch (error) {
-    console.log('post', error);
     next(error);
   }
 });
 
-// api/robots/:robotId
 router.put('/:robotId', async (req, res, next) => {
   try {
-    console.log(JSON.stringify(req.body))
     const [robotCount, affectedRobot] = await Robot.update(req.body, {
       where: {
         id: req.params.robotId,
@@ -67,7 +57,6 @@ router.put('/:robotId', async (req, res, next) => {
   }
 });
 
-// api/robots/robotId
 router.delete('/:robotId', async (req, res, next) => {
   try {
     const id = req.params.robotId;
@@ -84,11 +73,11 @@ router.delete('/:robotId', async (req, res, next) => {
 
 router.put('/:robotId/projects/:projectId', async (req, res, next) => {
   try {
-    const projectId = Number(req.params.projectId)
-    const robotId = Number(req.params.robotId)
+    const projectId = Number(req.params.projectId);
+    const robotId = Number(req.params.robotId);
 
-    const robot = await Robot.findByPk(robotId)
-    await robot.removeProject(projectId)
+    const robot = await Robot.findByPk(robotId);
+    await robot.removeProject(projectId);
   } catch (error) {
     next(error);
   }

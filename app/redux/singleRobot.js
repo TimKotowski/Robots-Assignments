@@ -29,7 +29,7 @@ export const fetchSingleRobot = (robotId) => async(dispatch) => {
 export const fetchRobotUnassignAssocation = (robotId, projectId) => async(dispatch) => {
   try {
     const {data: updatedRobot} = await axios.put(`/api/robots/${robotId}/projects/${projectId}`)
-    dispatch(unassignRobot(updatedRobot))
+    return dispatch(unassignRobot(updatedRobot))
   } catch (error) {
     console.log('failed to fetch updated route in the unassign project from robot thunk', error)
   }

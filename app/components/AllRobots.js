@@ -19,7 +19,6 @@ export class AllRobots extends Component {
   }
 
   render() {
-
     return (
       <div className="container">
         <RobotInputForm />
@@ -30,7 +29,8 @@ export class AllRobots extends Component {
             </NavLink>
             <div
               className="card-body"
-              style={{ fontWeight: 'bold', backgroundColor: '#8c8c8c' }}>
+              style={{ fontWeight: 'bold', backgroundColor: '#8c8c8c' }}
+            >
               <h2 className="card-title">{robot.name}</h2>
               <h3 className="card-text" style={{ color: '#0d0d0d' }}>
                 Fuel Type: {robot.fuelType}
@@ -43,7 +43,8 @@ export class AllRobots extends Component {
                 type="button"
                 value="Remove text input "
                 className="btn btn-danger "
-                style={{ width: '2.4rem', height: '2.2rem' }}>
+                style={{ width: '2.4rem', height: '2.2rem' }}
+              >
                 X
               </button>
             </div>

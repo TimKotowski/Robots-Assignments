@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { Project, Robot } = require('../db');
 
-// api/projects
 router.get('/', async (req, res, next) => {
   try {
     const allProjects = await Project.findAll();
@@ -11,7 +10,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// api/projects/:projectId
 router.get('/:projectId', async (req, res, next) => {
   try {
     const id = req.params.projectId;
@@ -27,10 +25,9 @@ router.get('/:projectId', async (req, res, next) => {
   }
 });
 
-// api/projects
 router.post('/', async (req, res, next) => {
   try {
-const { title, deadline, priority, description, completed } = req.body;
+    const { title, deadline, priority, description, completed } = req.body;
     const createProject = await Project.create({
       title,
       deadline,
@@ -45,7 +42,6 @@ const { title, deadline, priority, description, completed } = req.body;
   }
 });
 
-// api.projects/:projectId
 router.put('/:projectId', async (req, res, next) => {
   try {
     const [projectCount, affectProject] = await Project.update(req.body, {
@@ -62,7 +58,6 @@ router.put('/:projectId', async (req, res, next) => {
   }
 });
 
-// api/projects/:projectId
 router.delete('/:projectId', async (req, res, next) => {
   try {
     const id = req.params.projectId;
@@ -77,40 +72,35 @@ router.delete('/:projectId', async (req, res, next) => {
   }
 });
 
-
 router.put('/:projectId/robots/:robotId', async (req, res, next) => {
   try {
-      const robotId = Number(req.params.robotId)
-      const projectId = Number(req.params.projectId)
+    const robotId = Number(req.params.robotId);
+    const projectId = Number(req.params.projectId);
 
-      const project = await Project.findByPk(projectId)
-      await project.removeRobot(robotId)
+    const project = await Project.findByPk(projectId);
+    await project.removeRobot(robotId);
   } catch (error) {
-    next(error)
+    next(error);
   }
-
-
-})
+});
 
 router.post('/:projectId', async (req, res, next) => {
   try {
     const completedUpdate = await Project.findOne({
       where: {
         id: req.params.projectId,
-      completed: 'false'
-    }
-  })
-    if (completedUpdate){
+        completed: 'false',
+      },
+    });
+    if (completedUpdate) {
       completedUpdate.update({
-        completed: 'true'
-      })
+        completed: 'true',
+      });
     }
-   res.json(completedUpdate)
+    res.json(completedUpdate);
   } catch (error) {
-    next(error)
+    next(error);
   }
-
-
-})
+});
 
 module.exports = router;

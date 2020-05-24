@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchUpdatedRobot, updateRobotForm } from '../redux/robots';
+import { fetchUpdatedRobot, updateRobotForm } from '../redux/robots';
 
 export class EditRobotForm extends Component {
   constructor(props) {
@@ -8,30 +8,27 @@ export class EditRobotForm extends Component {
     this.state = {
       name: this.props.robotInfo.name,
       fuelLevel: this.props.robotInfo.fuelLevel,
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value
-    })
-
+      [e.target.name]: e.target.value,
+    });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const id = this.props.robotInfo.id
+    const id = this.props.robotInfo.id;
     const { name, fuelLevel } = this.state;
-    this.props.createRobot({name, fuelLevel}, id);
-    window.location.reload()
+    this.props.createRobot({ name, fuelLevel }, id);
+    window.location.reload();
   }
 
-
   render() {
-   const {name, fuelLevel} = this.state
+    const { name, fuelLevel } = this.state;
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit}>
@@ -66,7 +63,6 @@ export class EditRobotForm extends Component {
 
 const mapState = (state) => ({
   robotInfo: state.robotInfo.singleRobotInfo,
-
 });
 
 const mapDispatch = (dispatch) => ({

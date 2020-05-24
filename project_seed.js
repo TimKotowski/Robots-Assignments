@@ -1,5 +1,3 @@
-
-
 module.exports = [
   {
     id: 1,
@@ -26,6 +24,3 @@ module.exports = [
     description: 'i am a bob',
   },
 ];
-
-
-

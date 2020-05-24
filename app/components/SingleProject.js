@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchSingleProject, fetchProjectUnassignAssocation, fetchCompletedProjct} from '../redux/singleProject';
+import {
+  fetchSingleProject,
+  fetchProjectUnassignAssocation,
+  fetchCompletedProjct,
+} from '../redux/singleProject';
 import EditProjectForm from './EditProjectForm';
 
 export class SingleProject extends Component {
@@ -24,13 +28,13 @@ export class SingleProject extends Component {
   handleUnassign(robotId) {
     const projectId = this.props.project.id;
     this.props.unassignProejctsRobot(robotId, projectId);
-    window.location.reload()
+    window.location.reload();
   }
 
-  handleComplete(completed){
-    const id = this.props.project.id
-    this.props.completeProject({completed}, id)
-    window.location.reload()
+  handleComplete(completed) {
+    const id = this.props.project.id;
+    this.props.completeProject({ completed }, id);
+    window.location.reload();
   }
 
   render() {
@@ -53,8 +57,10 @@ export class SingleProject extends Component {
                 fuelType: {project.robots[0].fuelType}
               </h3>
               <button
-                onClick={() => this.handleUnassign(project.robots[0].id)   } type="button"
-                className="btn btn-warning">
+                onClick={() => this.handleUnassign(project.robots[0].id)}
+                type="button"
+                className="btn btn-warning"
+              >
                 Unassign
               </button>
             </div>
@@ -64,15 +70,24 @@ export class SingleProject extends Component {
           <div
             key={project.id}
             className="card-body"
-            style={{ backgroundColor: 'grey' }}>
+            style={{ backgroundColor: 'grey' }}
+          >
             <h3 style={{ color: '#0d0d0d' }}>
               Description: {project.description}
             </h3>
             <h3 style={{ color: '#0d0d0d' }}>Title: {project.title}</h3>
             <h3 style={{ color: '#0d0d0d' }}>Priority: {project.priority}</h3>
             <h3 style={{ color: '#0d0d0d' }}>Deadline: {project.deadline}</h3>
-            <h3 style={{ color: '#0d0d0d' }}>Completed: {project.completed ? 'true' : 'false' }</h3>
-            <button  onClick={() => this.handleComplete(project.completed ? 'true' : 'false' )} type="button" className="btn btn-success">
+            <h3 style={{ color: '#0d0d0d' }}>
+              Completed: {project.completed ? 'true' : 'false'}
+            </h3>
+            <button
+              onClick={() =>
+                this.handleComplete(project.completed ? 'true' : 'false')
+              }
+              type="button"
+              className="btn btn-success"
+            >
               Completed
             </button>
           </div>

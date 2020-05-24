@@ -56,10 +56,7 @@ export const fetchCreatedProject = (projectInfo) => async (dispatch) => {
     const { data: newProject } = await axios.post('/api/projects', projectInfo);
     dispatch(createdProjectInfo(newProject));
   } catch (error) {
-    console.log(
-      'you have an error in your Project Post route thunk creator',
-      error
-    );
+    console.log('you have an error in your Project Post route thunk creator', error);
   }
 };
 
@@ -68,24 +65,15 @@ export const fetchDeletedProject = (projectId) => async (dispatch) => {
     await axios.delete(`/api/projects/${projectId}`, projectId);
     dispatch(deleteProjectForm(projectId));
   } catch (error) {
-    console.log(
-      'you have an error in your project delete route thunk creator',
-      error
-    );
+    console.log('you have an error in your project delete route thunk creator', error);
   }
 };
 export const fetchUpdatedForm = (project, projectId) => async (dispatch) => {
   try {
-    const { data: updatedProject } = await axios.put(
-      `/api/projects/${projectId}`,
-      project
-    );
+    const { data: updatedProject } = await axios.put(`/api/projects/${projectId}`, project);
     dispatch(setUpdatedForm(updatedProject));
   } catch (error) {
-    console.log(
-      'you have an error in your project delete route thunk creator',
-      error
-    );
+    console.log('you have an error in your project delete route thunk creator', error);
   }
 };
 
