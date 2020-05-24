@@ -41,10 +41,10 @@ export const fetchProjectUnassignAssocation = (robotId, projectId) => async (dis
   }
 }
 
-export const fetchCompletedProjct = (completed) => async(dispatch) => {
+export const fetchCompletedProjct = (completed, projectId) => async(dispatch) => {
   try {
     console.log('htitng start')
-     const {data: updatedComplete} = axios.post(`/api/projects/completed`, completed)
+     const {data: updatedComplete} = axios.post(`/api/projects/${projectId}`, completed)
     console.log('htitng middle')
     dispatch(completedProject(updatedComplete))
     console.log('htitng end')

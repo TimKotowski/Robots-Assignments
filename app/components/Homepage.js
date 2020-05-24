@@ -3,8 +3,8 @@ import React from 'react';
 export const Homepage = () => {
   return (
     <div>
-      <h1>Welcome to Robots</h1>
-      <p>Find a robot!</p>
+      <h1>Welcome to JPFP!</h1>
+
     </div>
   );
 };

@@ -28,7 +28,8 @@ export class SingleProject extends Component {
   }
 
   handleComplete(completed){
-    this.props.completeProject(completed)
+    const id = this.props.project.id
+    this.props.completeProject({completed}, id)
     window.location.reload()
   }
 
@@ -77,7 +78,7 @@ export class SingleProject extends Component {
           </div>
         </div>
         {isLoaded && !project.robots.length && (
-          <h1>No Robots assocatied with that robot</h1>
+          <h1>No Projects associated with that robot</h1>
         )}
       </div>
     );
@@ -91,7 +92,7 @@ const mapState = (state) => ({
 const mapDispatch = (dispatch) => ({
   loadProjectInfo: (project) => dispatch(fetchSingleProject(project)),
   unassignProejctsRobot: (robotId, projectId) => dispatch(fetchProjectUnassignAssocation(robotId, projectId)),
-  completeProject: (completed) => dispatch(fetchCompletedProjct(completed))
+  completeProject: (completed, id) => dispatch(fetchCompletedProjct(completed, id))
 });
 
 export default connect(mapState, mapDispatch)(SingleProject);

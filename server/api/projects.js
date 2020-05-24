@@ -92,10 +92,14 @@ router.put('/:projectId/robots/:robotId', async (req, res, next) => {
 
 })
 
-router.post('/completed', async (req, res, next) => {
+router.post('/:projectId', async (req, res, next) => {
   try {
-
-    const completedUpdate = await Project.findOne({where: {completed: 'false'}})
+    const completedUpdate = await Project.findOne({
+      where: {
+        id: req.params.projectId,
+      completed: 'false'
+    }
+  })
     if (completedUpdate){
       completedUpdate.update({
         completed: 'true'

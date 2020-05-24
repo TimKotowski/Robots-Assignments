@@ -43,11 +43,10 @@ export class SingleRobots extends Component {
               width: '18rem',
             }}>
             <div className="card-body">
-              <h4>{robot.projects[0].title}</h4>
-              <h4>{robot.projects[0].priority}</h4>
-              <h4>{robot.projects[0].descripton}</h4>
-              <h4>{robot.projects[0].completed}</h4>
-              <h4>{robot.projects[0].deadline}</h4>
+              <h4>Projects Title: {robot.projects[0].title}</h4>
+              <h4>Priority: {robot.projects[0].priority}</h4>
+              <h4>Descripton: {robot.projects[0].description}</h4>
+              <h4>Deadline: {robot.projects[0].deadline}</h4>
               <button
                 onClick={() => {
                   this.handleUnassign(robot.projects[0].id);
@@ -70,9 +69,9 @@ export class SingleRobots extends Component {
                 src={`${robot.imageUrl}`}
                 alt="Card image cap"
               />
-              <h4>{robot.name}</h4>
-              <h4>{robot.fuelLevel}</h4>
-              <h4>{robot.fuelType}</h4>
+              <h4>Name: {robot.name}</h4>
+              <h4>Fuel Level: {robot.fuelLevel}</h4>
+              <h4>Fuel Type: {robot.fuelType}</h4>
             </div>
           </div>
           {isLoaded && !robot.projects.length && (

@@ -17,7 +17,6 @@ const seed = async () => {
     await  robot.addProject(project)
     await  _robot.addProject(_project)
 
-
   } catch (err) {
     console.log(red(err));
   }
