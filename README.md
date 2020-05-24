@@ -1,5 +1,8 @@
 # Junior Phase Final Project
 
+YOUTUBE VIDEO JPFP SUBMISSION
+https://www.youtube.com/watch?v=eH1knOAx0GQ&feature=youtu.be
+
 ## Getting started
 
 1. Fork and clone this repo.
